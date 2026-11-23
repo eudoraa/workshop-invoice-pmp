@@ -59,20 +59,16 @@ export function generatePkbPdf(
   doc.addImage(PMP_LOGO_BASE64, 'PNG', marginX, MARGIN_TOP, 30, 15);
 
   // Workshop identity side-by-side to the right of PMP Logo
-  const identityX = marginX + 34;
+  const identityX = marginX + 33;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(14);
   doc.text(PKB_WORKSHOP_INFO.name, identityX, MARGIN_TOP + 5);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
-  const pkbAddr1 = doc.splitTextToSize(PKB_WORKSHOP_INFO.addressLine1, 90);
-  const pkbAddr2 = doc.splitTextToSize(PKB_WORKSHOP_INFO.addressLine2, 90);
-  let addrY = MARGIN_TOP + 10.2;
-  doc.text(pkbAddr1, identityX, addrY);
-  addrY += pkbAddr1.length * 4.4;
-  doc.text(pkbAddr2, identityX, addrY);
-  addrY += (pkbAddr2.length - 1) * 4.4;
+  doc.setFontSize(8.5);
+  const addrY1 = MARGIN_TOP + 10;
+  doc.text(PKB_WORKSHOP_INFO.addressLine1, identityX, addrY1);
+  doc.text(PKB_WORKSHOP_INFO.addressLine2, identityX, addrY1 + 4);
 
   // Right Top: Perintah Kerja Bengkel / Service (centered on right block)
   const rightTitleCenterX = 170;
@@ -82,7 +78,7 @@ export function generatePkbPdf(
   doc.text(PKB_WORKSHOP_INFO.titleLine2, rightTitleCenterX, MARGIN_TOP + 12.5, { align: 'center' });
 
   // Horizontal divider line directly below Kop Surat
-  y = Math.max(addrY, MARGIN_TOP + 15) + 4.5;
+  y = Math.max(addrY1 + 4, MARGIN_TOP + 15) + 4.5;
   doc.setLineWidth(0.4);
   doc.line(marginX, y, rightEdge, y);
 

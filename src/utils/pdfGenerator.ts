@@ -67,14 +67,12 @@ export function generateAndDownloadInvoicePdf(
   doc.text(WORKSHOP_INFO.name, marginX, leftY);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
-  leftY += 5.2;
-  const kopAddr1 = doc.splitTextToSize(WORKSHOP_INFO.addressLine1, 104);
-  doc.text(kopAddr1, marginX, leftY);
-  leftY += kopAddr1.length * 4.5;
-  const kopAddr2 = doc.splitTextToSize(WORKSHOP_INFO.addressLine2, 104);
-  doc.text(kopAddr2, marginX, leftY);
-  leftY += kopAddr2.length * 4.5;
+  doc.setFontSize(8.5);
+  leftY += 5;
+  doc.text(WORKSHOP_INFO.addressLine1, marginX, leftY);
+  leftY += 4;
+  doc.text(WORKSHOP_INFO.addressLine2, marginX, leftY);
+  leftY += 4;
   doc.text(WORKSHOP_INFO.phone, marginX, leftY);
 
   // Right Top: Kategori Pekerjaan, Email, NPWP (left-aligned inside right block)

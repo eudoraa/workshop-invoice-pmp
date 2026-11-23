@@ -127,24 +127,26 @@ export const InvoicePaperPreview: React.FC<InvoicePaperPreviewProps> = ({
       }}
     >
       {/* 1. KOP SURAT (HEADER) */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-3">
         {/* Left: Monogram PMP + Workshop Identity */}
-        <div className="w-[59%]">
+        <div className="flex-1 min-w-0">
           <img
             src={PMP_LOGO_BASE64}
             alt="Logo CV Perkasa Mandiri Putra"
             className="h-11 w-auto object-contain mb-2"
           />
-          <div className="text-[9.5pt] leading-[1.4] text-black">
-            <div className="text-[15pt] font-bold leading-tight mb-1">{WORKSHOP_INFO.name}</div>
-            <div>{WORKSHOP_INFO.addressLine1}</div>
-            <div>{WORKSHOP_INFO.addressLine2}</div>
-            <div>{WORKSHOP_INFO.phone}</div>
+          <div className="text-[8.5pt] leading-snug text-black">
+            <div className="text-[15pt] font-bold leading-tight mb-1 whitespace-nowrap">
+              {WORKSHOP_INFO.name}
+            </div>
+            <div className="whitespace-nowrap">{WORKSHOP_INFO.addressLine1}</div>
+            <div className="whitespace-nowrap">{WORKSHOP_INFO.addressLine2}</div>
+            <div className="whitespace-nowrap">{WORKSHOP_INFO.phone}</div>
           </div>
         </div>
 
         {/* Right: Kategori Pekerjaan, Email, NPWP */}
-        <div className="w-[39%] pt-5 text-left text-black">
+        <div className="shrink-0 w-[37%] pt-5 text-left text-black">
           <div
             className="text-[13pt] font-bold uppercase tracking-tight leading-snug"
             data-testid="preview-kategori"

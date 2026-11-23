@@ -19,21 +19,21 @@ export const NewGenKopHeader: React.FC<NewGenKopHeaderProps> = ({
   return (
     <div>
       {/* Kop Surat Murni New Gen */}
-      <div className="flex items-start justify-between gap-3 pb-3.5 border-b-2 border-[#1e293b]">
+      <div className="flex items-start justify-between gap-2.5 pb-3.5 border-b-2 border-[#1e293b]">
         {/* Left: PMP Logo + Workshop Identity side-by-side */}
-        <div className="flex items-start gap-3 min-w-0">
+        <div className="flex items-start gap-[10px] flex-1 min-w-0">
           <img
             src={PMP_LOGO_BASE64}
             alt="Logo CV Perkasa Mandiri Putra"
-            className="w-[22mm] h-[11mm] object-contain shrink-0 mt-0.5"
+            className="w-[18.5mm] h-[9.25mm] object-contain shrink-0 mt-0.5"
           />
-          <div className="min-w-0">
+          <div className="flex-1 min-w-0">
             <div className="text-[15pt] font-bold text-[#0f172a] leading-tight tracking-tight whitespace-nowrap">
               {companyName}
             </div>
-            <div className="text-[9.5pt] text-[#475569] leading-[1.38] mt-1">
-              <div>{NEW_GEN_WORKSHOP_INFO.addressLine1}</div>
-              <div>{NEW_GEN_WORKSHOP_INFO.addressLine2}</div>
+            <div className="text-[8.5pt] text-[#475569] leading-snug mt-1">
+              <div className="whitespace-nowrap">{NEW_GEN_WORKSHOP_INFO.addressLine1}</div>
+              <div className="whitespace-nowrap">{NEW_GEN_WORKSHOP_INFO.addressLine2}</div>
             </div>
           </div>
         </div>

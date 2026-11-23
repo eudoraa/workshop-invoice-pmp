@@ -136,26 +136,26 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
       }}
     >
       {/* 1. KOP SURAT PKB */}
-      <div className="flex items-center justify-between gap-3 pb-3 border-b-[1.5px] border-black">
+      <div className="flex items-center justify-between gap-2.5 pb-3 border-b-[1.5px] border-black">
         {/* Left: Larger PMP Logo + Workshop Identity side-by-side */}
-        <div className="flex items-center gap-3 w-[69%]">
+        <div className="flex items-center gap-[10px] flex-1 min-w-0">
           <img
             src={PMP_LOGO_BASE64}
             alt="Logo CV. Perkasa Mandiri Putra"
-            className="w-[30mm] h-[15mm] object-contain shrink-0"
+            className="w-[26mm] h-[13mm] object-contain shrink-0"
           />
-          <div className="text-[9.5pt] leading-[1.38] text-black">
-            <div className="text-[14.5pt] font-bold uppercase tracking-tight leading-tight mb-0.5">
+          <div className="text-[8.5pt] leading-snug text-black flex-1 min-w-0">
+            <div className="text-[14.5pt] font-bold uppercase tracking-tight leading-tight mb-0.5 whitespace-nowrap">
               {PKB_WORKSHOP_INFO.name}
             </div>
-            <div>{PKB_WORKSHOP_INFO.addressLine1}</div>
-            <div>{PKB_WORKSHOP_INFO.addressLine2}</div>
+            <div className="whitespace-nowrap">{PKB_WORKSHOP_INFO.addressLine1}</div>
+            <div className="whitespace-nowrap">{PKB_WORKSHOP_INFO.addressLine2}</div>
           </div>
         </div>
 
         {/* Right: Document Title centered on right block */}
-        <div className="w-[29%] text-center text-[13pt] font-bold leading-snug text-black">
-          <div>{PKB_WORKSHOP_INFO.titleLine1}</div>
+        <div className="shrink-0 w-[29%] text-center text-[13pt] font-bold leading-snug text-black">
+          <div className="whitespace-nowrap">{PKB_WORKSHOP_INFO.titleLine1}</div>
           <div>{PKB_WORKSHOP_INFO.titleLine2}</div>
         </div>
       </div>

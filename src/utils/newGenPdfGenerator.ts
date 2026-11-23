@@ -57,27 +57,23 @@ function drawNewGenKopHeader(
 ): number {
   const topY = MARGIN_TOP;
 
-  // Left: PMP Logo (~22mm x 11mm) + Company Name & 2-line Address
-  doc.addImage(PMP_LOGO_BASE64, 'PNG', marginX, topY, 22, 11);
+  // Left: PMP Logo (~18.5mm x 9.25mm) + Company Name & 2-line Address starting at X = 36
+  doc.addImage(PMP_LOGO_BASE64, 'PNG', marginX, topY, 18.5, 9.25);
 
-  const identityX = marginX + 25;
+  const identityX = 36;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(15);
   doc.setTextColor(...INK);
   doc.text(companyName, identityX, topY + 4.4);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
+  doc.setFontSize(8.5);
   doc.setTextColor(...MUTED);
-  const addr1 = doc.splitTextToSize(NEW_GEN_WORKSHOP_INFO.addressLine1, 90);
-  const addr2 = doc.splitTextToSize(NEW_GEN_WORKSHOP_INFO.addressLine2, 90);
-  let leftAddrY = topY + 9.4;
-  doc.text(addr1, identityX, leftAddrY);
-  leftAddrY += addr1.length * 4.3;
-  doc.text(addr2, identityX, leftAddrY);
-  leftAddrY += (addr2.length - 1) * 4.3;
+  const addrY1 = topY + 9.4;
+  doc.text('Jl. Balai Rakyat No. 101, RT 012/RW 001, Kel. Cakung Timur,', identityX, addrY1);
+  doc.text('Kec. Cakung, Kota Jakarta Timur, DKI Jakarta 13910', identityX, addrY1 + 4);
 
-  // Right: Stacked 3 lines (Phone with icon, Email with icon, NPWP) at 9.5pt
+  // Right: Stacked 3 lines (Phone with icon, Email with icon, NPWP)
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9.5);
   doc.setTextColor(...INK);
@@ -98,7 +94,7 @@ function drawNewGenKopHeader(
   });
 
   // Strong Kop bottom divider (2px ~ 0.65mm)
-  const kopLineY = Math.max(leftAddrY, topY + 13.6) + 4;
+  const kopLineY = Math.max(addrY1 + 4, topY + 13.6) + 4;
   doc.setDrawColor(...BORDER_STRONG);
   doc.setLineWidth(0.65);
   doc.line(marginX, kopLineY, rightEdge, kopLineY);
