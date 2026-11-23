@@ -1,0 +1,6 @@
+{
+  "name": "Workshop Invoice System - CV PERKASA MANDIRI PUTRA",
+  "description": "Aplikasi pembuatan invoice bengkel resmi CV PERKASA MANDIRI PUTRA dengan ekstraksi otomatis dokumen SPO GoFleet & OLXMobbi serta ekspor PDF Vektor A4.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
