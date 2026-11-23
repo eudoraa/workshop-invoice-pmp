@@ -29,25 +29,18 @@ export function generateAndDownloadInvoicePdf(
     format: 'a4',
   });
 
-  const PAGE_WIDTH = 210;
-  const PAGE_HEIGHT = 297;
-  const MARGIN_TOP = 15;
-  const MARGIN_BOTTOM = 15;
-  const MARGIN_LEFT = 15;
-  const MARGIN_RIGHT = 15;
-  const CONTENT_WIDTH = PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT; // 180 mm
+  const pageWidth = 210;
+  const pageHeight = 297;
+  const marginX = 15;
+  const rightEdge = pageWidth - marginX; // 195mm
+  const centerX = pageWidth / 2; // 105mm
 
-  const marginX = MARGIN_LEFT;
-  const rightEdge = MARGIN_LEFT + CONTENT_WIDTH; // 195 mm
-  const centerX = PAGE_WIDTH / 2; // 105 mm
-  const bottomLimit = PAGE_HEIGHT - MARGIN_BOTTOM; // 282 mm
-
-  let y = MARGIN_TOP;
+  let y = 12;
 
   const ensureSpace = (neededMm: number) => {
-    if (y + neededMm > bottomLimit) {
+    if (y + neededMm > pageHeight - 15) {
       doc.addPage();
-      y = MARGIN_TOP;
+      y = 15;
     }
   };
 
@@ -57,98 +50,97 @@ export function generateAndDownloadInvoicePdf(
   // =========================================================================
   // 1. KOP SURAT (HEADER)
   // =========================================================================
-  // Left Top: Official PMP Logo Image (proportional 2:1 ratio -> width 22mm, height 11mm)
-  doc.addImage(PMP_LOGO_BASE64, 'PNG', marginX, MARGIN_TOP, 22, 11);
+  // Left Top: Official PMP Logo Image (proportional 2:1 ratio -> width 18mm, height 9mm)
+  doc.addImage(PMP_LOGO_BASE64, 'PNG', 15, 12, 18, 9);
 
-  // Workshop Identity directly under PMP Logo
-  let leftY = MARGIN_TOP + 16.5;
+  // Workshop Identity directly under PMP Logo (starting at Y = 25)
+  let leftY = 25;
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(15);
+  doc.setFontSize(8.5);
   doc.text(WORKSHOP_INFO.name, marginX, leftY);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  leftY += 5;
+  doc.setFontSize(8);
+  leftY += 3.8;
   doc.text(WORKSHOP_INFO.addressLine1, marginX, leftY);
-  leftY += 4;
+  leftY += 3.8;
   doc.text(WORKSHOP_INFO.addressLine2, marginX, leftY);
-  leftY += 4;
+  leftY += 3.8;
   doc.text(WORKSHOP_INFO.phone, marginX, leftY);
 
   // Right Top: Kategori Pekerjaan, Email, NPWP (left-aligned inside right block)
-  const rightBlockX = 124;
-  let rightY = MARGIN_TOP + 11.5;
+  const rightBlockX = 132;
+  let rightY = 23;
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(12);
+  doc.setFontSize(10.5);
   doc.text((data.kategoriPekerjaan || '').toUpperCase(), rightBlockX, rightY);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
-  rightY += 6;
+  doc.setFontSize(8.5);
+  rightY += 5;
   doc.text(`Email : ${WORKSHOP_INFO.email}`, rightBlockX, rightY);
-  rightY += 4.8;
+  rightY += 4.2;
   doc.text(`NPWP : ${WORKSHOP_INFO.npwp}`, rightBlockX, rightY);
 
-  // Center Title: INVOICE (14pt Bold, Kapital) + Full Horizontal Line below
-  y = Math.max(leftY, rightY) + 7;
+  // Center Title: INVOICE (Bold, Kapital, ~12pt) + Full Horizontal Line below
+  y = Math.max(leftY, rightY) + 4.5;
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
+  doc.setFontSize(12);
   doc.text('INVOICE', centerX, y, { align: 'center' });
 
-  y += 3;
-  doc.setLineWidth(0.45);
+  y += 2.2;
+  doc.setLineWidth(0.4);
   doc.line(marginX, y, rightEdge, y);
 
   // =========================================================================
   // 2. INFORMASI KLIEN & INFORMASI BENGKEL (2 KOLOM DI BAWAH GARIS KOP)
   // =========================================================================
-  y += 6.5;
+  y += 5.5;
   const infoStartY = y;
 
   // Left Column: Kepada Yth
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9.8);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.5);
   doc.text('Kepada Yth', marginX, infoStartY);
 
-  let clientY = infoStartY + 6.5;
+  // 1 empty line spacing, then client details
+  let clientY = infoStartY + 7.2;
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.8);
   doc.text(data.namaKlien || '-', marginX, clientY);
-  clientY += 4.8;
-  const addr1Lines = doc.splitTextToSize(data.alamatBaris1 || '', 104);
+  clientY += 4.2;
+  const addr1Lines = doc.splitTextToSize(data.alamatBaris1 || '', 105);
   doc.text(addr1Lines, marginX, clientY);
-  clientY += addr1Lines.length * 4.6;
-  const addr2Lines = doc.splitTextToSize(data.alamatBaris2 || '', 104);
+  clientY += addr1Lines.length * 4.0;
+  const addr2Lines = doc.splitTextToSize(data.alamatBaris2 || '', 105);
   doc.text(addr2Lines, marginX, clientY);
-  clientY += addr2Lines.length * 4.6;
+  clientY += addr2Lines.length * 4.0;
 
   // Right Column: Informasi Bengkel
-  const workshopInfoX = 124;
-  const colonX = 144;
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9.8);
+  const workshopInfoX = 132;
+  const colonX = 152;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.5);
   doc.text('Informasi Bengkel', workshopInfoX, infoStartY);
 
-  doc.setFont('helvetica', 'normal');
-  let bengkelY = infoStartY + 6.5;
+  let bengkelY = infoStartY + 7.2;
   doc.text('Hal', workshopInfoX, bengkelY);
   doc.text(`: ${data.hal || '1'}`, colonX, bengkelY);
 
-  bengkelY += 4.8;
+  bengkelY += 4.2;
   doc.text('No Inv', workshopInfoX, bengkelY);
   doc.text(`: ${data.noInv || '-'}`, colonX, bengkelY);
 
-  bengkelY += 4.8;
+  bengkelY += 4.2;
   doc.text('Tgl Inv', workshopInfoX, bengkelY);
   doc.text(`: ${data.tglInv || '-'}`, colonX, bengkelY);
 
   if (data.includeSpk) {
-    bengkelY += 4.8;
+    bengkelY += 4.2;
     doc.text('No. SPK', workshopInfoX, bengkelY);
     doc.text(`: ${resolveDisplaySpk(data.noSpk, data.noInv)}`, colonX, bengkelY);
   }
 
-  y = Math.max(clientY, bengkelY) + 5;
+  y = Math.max(clientY, bengkelY) + 4.5;
 
   // =========================================================================
   // 3. TABEL DATA KENDARAAN (1 BARIS, HANYA GARIS HORIZONTAL ATAS & BAWAH)
@@ -156,42 +148,42 @@ export function generateAndDownloadInvoicePdf(
   doc.setLineWidth(0.35);
   doc.line(marginX, y, rightEdge, y);
 
-  y += 5.5;
+  y += 4.5;
   const colPolisiX = marginX + 2;
   const colModelX = marginX + 42;
   const colTahunX = marginX + 102;
   const colSpoX = marginX + 128;
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9.8);
+  doc.setFontSize(8.5);
   doc.text('NO. POLISI', colPolisiX, y);
   doc.text('MODEL', colModelX, y);
   doc.text('TAHUN', colTahunX, y);
   doc.text('NOMOR SPO', colSpoX, y);
 
-  y += 5.8;
+  y += 4.8;
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.8);
+  doc.setFontSize(8.5);
   doc.text(data.noPolisi || '-', colPolisiX, y);
   doc.text(data.model || '-', colModelX, y);
   doc.text(data.tahun || '', colTahunX, y);
   doc.text(data.nomorSpo || '-', colSpoX, y);
 
-  y += 3.8;
+  y += 2.6;
   doc.line(marginX, y, rightEdge, y);
 
   // =========================================================================
   // 4. TABEL LIST JASA & LIST SPAREPART (HANYA GARIS HORIZONTAL)
   // =========================================================================
   // Column coordinates (total width = 180mm: 15mm to 195mm)
-  const colNoCenter = marginX + 5.5; // 20.5mm
-  const colDescLeft = marginX + 13; // 28mm
-  const colDescCenter = marginX + 58; // 73mm
-  const colPriceRpLeft = marginX + 104; // 119mm
-  const colPriceRight = marginX + 134; // 149mm
+  const colNoCenter = marginX + 6; // 21mm
+  const colDescLeft = marginX + 14; // 29mm
+  const colDescCenter = marginX + 62; // 77mm
+  const colPriceRpLeft = marginX + 108; // 123mm
+  const colPriceRight = marginX + 136; // 151mm
   const colPriceCenter = (colPriceRpLeft + colPriceRight) / 2;
-  const colQtyCenter = marginX + 143; // 158mm
-  const colAmountRpLeft = marginX + 151; // 166mm
+  const colQtyCenter = marginX + 145; // 160mm
+  const colAmountRpLeft = marginX + 153; // 168mm
   const colAmountRight = rightEdge - 1; // 194mm
   const colAmountCenter = (colAmountRpLeft + colAmountRight) / 2;
 
@@ -202,18 +194,18 @@ export function generateAndDownloadInvoicePdf(
     subtotalLabel: string,
     subtotalValue: number
   ) => {
-    ensureSpace(34);
+    ensureSpace(28);
     y += 7;
 
     // Section title (Bold, left-aligned)
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10.5);
+    doc.setFontSize(9);
     doc.text(sectionTitle, marginX, y);
 
-    y += 6.2;
+    y += 5;
     // Header row (NO top horizontal line)
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
     doc.text('No', colNoCenter, y, { align: 'center' });
     doc.text(itemHeaderLabel, colDescCenter, y, { align: 'center' });
     doc.text('HARGA SATUAN', colPriceCenter, y, { align: 'center' });
@@ -221,16 +213,16 @@ export function generateAndDownloadInvoicePdf(
     doc.text('JUMLAH', colAmountCenter, y, { align: 'center' });
 
     // Horizontal line directly below column header
-    y += 2.8;
-    doc.setLineWidth(0.35);
+    y += 2;
+    doc.setLineWidth(0.3);
     doc.line(marginX, y, rightEdge, y);
 
-    // Body rows (10pt, generous vertical rhythm)
+    // Body rows
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
+    doc.setFontSize(8.5);
 
     if (items.length === 0) {
-      y += 6.8;
+      y += 5.5;
       doc.text('-', colNoCenter, y, { align: 'center' });
       doc.text('-', colDescLeft, y);
       doc.text('Rp', colPriceRpLeft, y);
@@ -238,17 +230,17 @@ export function generateAndDownloadInvoicePdf(
       doc.text('0', colQtyCenter, y, { align: 'center' });
       doc.text('Rp', colAmountRpLeft, y);
       doc.text('0', colAmountRight, y, { align: 'right' });
-      y += 3.2;
+      y += 2.5;
     } else {
       items.forEach((item, idx) => {
-        ensureSpace(12);
-        y += 6.8;
+        ensureSpace(10);
+        y += 5;
         const unitPrice = Math.round(Number(item.hargaSatuan) || 0);
         const qty = Math.round(Number(item.qty) || 0);
         const rowTotal = unitPrice * qty;
 
         doc.text(String(idx + 1), colNoCenter, y, { align: 'center' });
-        const descLines = doc.splitTextToSize(item.nama || '-', 72);
+        const descLines = doc.splitTextToSize(item.nama || '-', 76);
         doc.text(descLines, colDescLeft, y);
 
         doc.text('Rp', colPriceRpLeft, y);
@@ -260,21 +252,21 @@ export function generateAndDownloadInvoicePdf(
         doc.text(formatCurrencyComma(rowTotal), colAmountRight, y, { align: 'right' });
 
         if (descLines.length > 1) {
-          y += (descLines.length - 1) * 4.6;
+          y += (descLines.length - 1) * 3.8;
         }
       });
-      y += 3.2;
+      y += 2.5;
     }
 
     // Horizontal line below last item row
     doc.line(marginX, y, rightEdge, y);
 
     // Subtotal row below closing line
-    y += 6;
-    const subtotalLabelX = marginX + 104;
-    const subtotalColonX = marginX + 146;
+    y += 5;
+    const subtotalLabelX = marginX + 108;
+    const subtotalColonX = marginX + 148;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
+    doc.setFontSize(8.5);
     doc.text(subtotalLabel, subtotalLabelX, y);
     doc.text(':', subtotalColonX, y);
     doc.text('Rp', colAmountRpLeft, y);
@@ -295,15 +287,15 @@ export function generateAndDownloadInvoicePdf(
     totals.subTotalSparepart
   );
 
-  // Optional PPN & PPh rows directly below Sparepart subtotal
-  const summaryLabelX = marginX + 104;
-  const summaryColonX = marginX + 146;
+  // Optional PPN & PPh rows above Total
+  const summaryLabelX = marginX + 108;
+  const summaryColonX = marginX + 148;
 
   if (data.enablePpn) {
     ensureSpace(8);
-    y += 5.8;
+    y += 4.8;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
+    doc.setFontSize(8.5);
     doc.text(`PPN (${data.ppnRate}%)`, summaryLabelX, y);
     doc.text(':', summaryColonX, y);
     doc.text('Rp', colAmountRpLeft, y);
@@ -312,73 +304,68 @@ export function generateAndDownloadInvoicePdf(
 
   if (data.enablePph) {
     ensureSpace(8);
-    y += 5.8;
+    y += 4.8;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
+    doc.setFontSize(8.5);
     doc.text(`PPh 23 (${data.pphRate}%)`, summaryLabelX, y);
     doc.text(':', summaryColonX, y);
     doc.text('Rp', colAmountRpLeft, y);
     doc.text(`-${formatCurrencyComma(totals.pphAmount)}`, colAmountRight, y, { align: 'right' });
   }
 
-  // =========================================================================
-  // 5. BLOK BAWAH (TOTAL + INFORMASI BANK & TANDA TANGAN)
-  //    Mengalir alami tepat di bawah garis penutup tabel (~6mm), tanpa ruang kosong tengah
-  // =========================================================================
-  const hasRole = Boolean(data.jabatanPenandatangan && data.jabatanPenandatangan.trim());
-  const footerTotalBlockHeight = 6 + 9.4 + 8 + 22 + (hasRole ? 6 : 0);
-  ensureSpace(footerTotalBlockHeight);
-
-  y += 6;
-
   // Grand Total Row sandwiched between two full horizontal lines
-  doc.setLineWidth(0.38);
+  ensureSpace(14);
+  y += 3.5;
+  doc.setLineWidth(0.35);
   doc.line(marginX, y, rightEdge, y);
 
-  y += 6.2;
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10.5);
+  y += 4.8;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
   doc.text('Total', summaryLabelX, y);
   doc.text(':', summaryColonX, y);
   doc.text('Rp', colAmountRpLeft, y);
   doc.text(formatCurrencyComma(totals.grandTotal), colAmountRight, y, { align: 'right' });
 
-  y += 3.2;
+  y += 2.4;
   doc.line(marginX, y, rightEdge, y);
 
-  // Footer 2 Columns: Informasi Bank & Tanda Tangan (~8mm gap)
-  const footerTopY = y + 8;
+  // =========================================================================
+  // 5. FOOTER (2 KOLOM BAWAH: INFORMASI BANK & TANDA TANGAN)
+  // =========================================================================
+  ensureSpace(48);
+  y += 10;
+  const footerTopY = y;
 
   // Left Column: Informasi Bank
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9.8);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.5);
   doc.text('Informasi Bank', marginX, footerTopY);
 
-  doc.setFont('helvetica', 'normal');
-  let bankY = footerTopY + 6.5;
+  let bankY = footerTopY + 7.5;
   doc.text(WORKSHOP_INFO.bankName, marginX, bankY);
-  bankY += 4.8;
+  bankY += 4.2;
   doc.text(WORKSHOP_INFO.bankAccount, marginX, bankY);
-  bankY += 4.8;
+  bankY += 4.2;
   doc.text(WORKSHOP_INFO.bankHolder, marginX, bankY);
-  bankY += 4.8;
+  bankY += 4.2;
   doc.text(WORKSHOP_INFO.bankCity, marginX, bankY);
 
   // Right Column: Tanda Tangan (Center-aligned on Right Block)
   const sigCenterX = 160;
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.8);
+  doc.setFontSize(8.5);
   doc.text(`Jakarta, ${data.tglInv || '-'}`, sigCenterX, footerTopY, { align: 'center' });
 
-  // ~22mm (~75px) natural wet signature & stamp space
-  const sigNameY = footerTopY + 22;
+  // ~25mm empty signature space
+  const sigNameY = footerTopY + 26;
   // Regular text, NOT bold and NOT underlined
   doc.setFont('helvetica', 'normal');
   doc.text(data.namaPenandatangan || '', sigCenterX, sigNameY, { align: 'center' });
 
-  // 1 empty line spacing (~5.8mm), then Jabatan Penandatangan (hidden if empty)
-  if (hasRole) {
-    doc.text(data.jabatanPenandatangan.trim(), sigCenterX, sigNameY + 5.8, { align: 'center' });
+  // 1 empty line spacing (~6.5mm), then Jabatan Penandatangan (hidden if empty)
+  if (data.jabatanPenandatangan && data.jabatanPenandatangan.trim()) {
+    doc.text(data.jabatanPenandatangan.trim(), sigCenterX, sigNameY + 6.5, { align: 'center' });
   }
 
   const filename = getTargetPdfFilename(data.noInv, data.noPolisi);

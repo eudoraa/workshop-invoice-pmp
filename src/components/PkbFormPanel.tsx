@@ -99,9 +99,9 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
   };
 
   const inputClass =
-    'w-full px-3 py-2 text-sm text-[#343A40] bg-white border border-[#CED4DA] rounded-lg focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15';
+    'w-full px-3 py-2 text-sm text-[#213448] bg-white border border-[#94B4C1]/60 rounded-lg focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40';
   const itemInputClass =
-    'px-3 py-1.5 text-xs text-[#343A40] bg-white border border-[#CED4DA] rounded-md focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15';
+    'px-3 py-1.5 text-xs text-[#213448] bg-white border border-[#94B4C1]/60 rounded-md focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40';
 
   return (
     <div className="space-y-5">
@@ -109,22 +109,22 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
       {activeInvoicePreset === 'OLX' && (
         <div
           data-testid="pkb-gofleet-info-badge"
-          className="p-3.5 rounded-xl bg-[#F8F9FA] border border-[#CED4DA] flex items-start gap-2.5 text-xs text-[#343A40]"
+          className="p-3.5 rounded-xl bg-[#EAE0CF]/45 border border-[#94B4C1]/60 flex items-start gap-2.5 text-xs text-[#213448]"
         >
-          <Info className="w-4 h-4 text-[#1F2E4A] shrink-0 mt-0.5" />
+          <Info className="w-4 h-4 text-[#547792] shrink-0 mt-0.5" />
           <div>
-            <span className="font-bold text-[#1F2E4A]">Dokumen Khusus GoFleet:</span>{' '}
-            Pembuatan PKB (Perintah Kerja Bengkel) dikhususkan untuk unit klien{' '}
+            <span className="font-bold">Dokumen Khusus GoFleet:</span> Pembuatan PKB
+            (Perintah Kerja Bengkel) dikhususkan untuk unit klien{' '}
             <strong>SOLUSI MOBILITAS BANGSA (GoFleet)</strong>.
           </div>
         </div>
       )}
 
       {/* SECTION: Informasi PKB & Kendaraan */}
-      <section className="bg-white rounded-xl border border-[#CED4DA] p-5 shadow-xs">
-        <div className="flex items-center gap-2.5 pb-3.5 mb-4 border-b border-[#CED4DA]">
-          <Car className="w-4 h-4 text-[#1F2E4A] shrink-0" />
-          <h2 className="text-sm font-bold text-[#343A40]">
+      <section className="bg-white rounded-xl border border-[#94B4C1]/40 p-5 shadow-sm">
+        <div className="flex items-center gap-2.5 pb-3.5 mb-4 border-b border-[#EAE0CF]">
+          <Car className="w-4 h-4 text-[#547792] shrink-0" />
+          <h2 className="text-sm font-bold text-[#213448]">
             Informasi PKB & Kendaraan
           </h2>
         </div>
@@ -135,7 +135,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
             <div className="flex items-center justify-between mb-1">
               <label
                 htmlFor="input-no-pkb"
-                className="text-xs font-semibold text-[#343A40]"
+                className="text-xs font-semibold text-[#213448]"
               >
                 No PKB
               </label>
@@ -143,7 +143,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                 <button
                   type="button"
                   onClick={handleResetPkbAutoSync}
-                  className="inline-flex items-center gap-1 text-[11px] font-medium text-[#1F2E4A] hover:underline cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[11px] font-medium text-[#547792] hover:text-[#213448] cursor-pointer"
                   title="Sinkronkan ulang dari No. Invoice (PMP + 4 digit terakhir)"
                 >
                   <RefreshCw className="w-3 h-3" />
@@ -165,7 +165,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
           <div>
             <label
               htmlFor="input-pkb-km"
-              className="block text-xs font-semibold text-[#343A40] mb-1"
+              className="block text-xs font-semibold text-[#213448] mb-1"
             >
               KM
             </label>
@@ -188,7 +188,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
           <div className="sm:col-span-2">
             <label
               htmlFor="input-tgl-pkb"
-              className="block text-xs font-semibold text-[#343A40] mb-1"
+              className="block text-xs font-semibold text-[#213448] mb-1"
             >
               Tanggal PKB (DD/MM/YYYY)
             </label>
@@ -206,13 +206,13 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                 />
               </div>
               <div className="sm:col-span-5 relative flex items-center">
-                <Calendar className="w-4 h-4 text-[#1F2E4A] absolute left-3 pointer-events-none" />
+                <Calendar className="w-4 h-4 text-[#547792] absolute left-3 pointer-events-none" />
                 <input
                   type="date"
                   aria-label="Pilih Tanggal PKB"
                   value={data.tanggalPkbIso}
                   onChange={(e) => handleDatePickerChange(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-sm bg-[#F8F9FA] border border-[#CED4DA] rounded-lg text-[#343A40] focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15"
+                  className="w-full pl-9 pr-3 py-2 text-sm bg-[#F7F5F0] border border-[#94B4C1]/60 rounded-lg text-[#213448] focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40"
                 />
               </div>
             </div>
@@ -222,7 +222,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
           <div>
             <label
               htmlFor="input-pkb-nopol"
-              className="block text-xs font-semibold text-[#343A40] mb-1"
+              className="block text-xs font-semibold text-[#213448] mb-1"
             >
               No Polisi
             </label>
@@ -246,7 +246,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
           <div>
             <label
               htmlFor="input-pkb-type"
-              className="block text-xs font-semibold text-[#343A40] mb-1"
+              className="block text-xs font-semibold text-[#213448] mb-1"
             >
               Type / Model Kendaraan
             </label>
@@ -268,24 +268,24 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
       </section>
 
       {/* SECTION: Tabel Rincian Jasa */}
-      <section className="bg-white rounded-xl border border-[#CED4DA] p-5 shadow-xs">
-        <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#CED4DA]">
+      <section className="bg-white rounded-xl border border-[#94B4C1]/40 p-5 shadow-sm">
+        <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#EAE0CF]">
           <div className="flex items-center gap-2.5">
-            <Wrench className="w-4 h-4 text-[#1F2E4A] shrink-0" />
-            <h2 className="text-sm font-bold text-[#343A40]">Tabel Rincian Jasa</h2>
+            <Wrench className="w-4 h-4 text-[#547792] shrink-0" />
+            <h2 className="text-sm font-bold text-[#213448]">Tabel Rincian Jasa</h2>
           </div>
           <button
             type="button"
             onClick={() => handleAddLineItem('jasaList')}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#1F2E4A] bg-[#F8F9FA] hover:bg-[#CED4DA]/45 border border-[#CED4DA] rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#213448] bg-[#94B4C1]/20 hover:bg-[#94B4C1]/35 border border-[#94B4C1]/60 rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0"
           >
             <span>+ Tambah Jasa</span>
           </button>
         </div>
 
         {data.jasaList.length === 0 ? (
-          <div className="text-center py-6 px-4 bg-[#F8F9FA] rounded-lg border border-dashed border-[#CED4DA]">
-            <p className="text-xs text-[#343A40]/75">
+          <div className="text-center py-6 px-4 bg-[#F7F5F0] rounded-lg border border-dashed border-[#94B4C1]/60">
+            <p className="text-xs text-[#547792]">
               Belum ada rincian jasa. Klik <strong>+ Tambah Jasa</strong> atau gunakan{' '}
               <strong>Ekstrak SPO</strong>.
             </p>
@@ -299,10 +299,10 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
               return (
                 <div
                   key={item.id}
-                  className="p-3 bg-[#F8F9FA] rounded-lg border border-[#CED4DA] space-y-2.5"
+                  className="p-3 bg-[#F7F5F0]/80 rounded-lg border border-[#94B4C1]/40 space-y-2.5"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-[#343A40]/70 w-5 shrink-0 tabular-nums">
+                    <span className="text-xs font-bold text-[#547792] w-5 shrink-0 tabular-nums">
                       {index + 1}.
                     </span>
                     <input
@@ -319,7 +319,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                       type="button"
                       onClick={() => handleRemoveLineItem('jasaList', item.id)}
                       aria-label={`Hapus Jasa PKB ${index + 1}`}
-                      className="p-1.5 text-[#343A40]/55 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                      className="p-1.5 text-[#94B4C1] hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -327,7 +327,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
 
                   <div className="grid grid-cols-12 gap-2 items-center pl-7">
                     <div className="col-span-3">
-                      <label className="block text-[10px] font-medium text-[#343A40]/75 mb-0.5">
+                      <label className="block text-[10px] font-medium text-[#547792] mb-0.5">
                         Qty
                       </label>
                       <input
@@ -339,11 +339,11 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                         onChange={(e) =>
                           handleUpdateLineItem('jasaList', item.id, 'qty', e.target.value)
                         }
-                        className="w-full px-2.5 py-1 text-xs text-[#343A40] bg-white border border-[#CED4DA] rounded-md tabular-nums focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15"
+                        className="w-full px-2.5 py-1 text-xs text-[#213448] bg-white border border-[#94B4C1]/60 rounded-md tabular-nums focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40"
                       />
                     </div>
                     <div className="col-span-5">
-                      <label className="block text-[10px] font-medium text-[#343A40]/75 mb-0.5">
+                      <label className="block text-[10px] font-medium text-[#547792] mb-0.5">
                         Harga Satuan (Rp)
                       </label>
                       <input
@@ -360,14 +360,14 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                             e.target.value
                           )
                         }
-                        className="w-full px-2.5 py-1 text-xs text-[#343A40] bg-white border border-[#CED4DA] rounded-md tabular-nums focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15"
+                        className="w-full px-2.5 py-1 text-xs text-[#213448] bg-white border border-[#94B4C1]/60 rounded-md tabular-nums focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40"
                       />
                     </div>
                     <div className="col-span-4 text-right">
-                      <div className="text-[10px] font-medium text-[#343A40]/75 mb-0.5">
+                      <div className="text-[10px] font-medium text-[#547792] mb-0.5">
                         Biaya Jasa
                       </div>
-                      <div className="text-xs font-bold text-[#343A40] tabular-nums">
+                      <div className="text-xs font-bold text-[#213448] tabular-nums">
                         Rp {formatCurrencyComma(rowTotal)}
                       </div>
                     </div>
@@ -378,33 +378,33 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
           </div>
         )}
 
-        <div className="mt-3 pt-3 border-t border-[#CED4DA] flex items-center justify-between text-xs">
-          <span className="font-semibold text-[#343A40]/80">Sub. Total Jasa</span>
-          <span className="font-bold text-[#343A40] tabular-nums">
+        <div className="mt-3 pt-3 border-t border-[#EAE0CF] flex items-center justify-between text-xs">
+          <span className="font-semibold text-[#547792]">Sub. Total Jasa</span>
+          <span className="font-bold text-[#213448] tabular-nums">
             Rp {formatCurrencyComma(totals.subTotalJasa)}
           </span>
         </div>
       </section>
 
       {/* SECTION: Tabel Rincian Part */}
-      <section className="bg-white rounded-xl border border-[#CED4DA] p-5 shadow-xs">
-        <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#CED4DA]">
+      <section className="bg-white rounded-xl border border-[#94B4C1]/40 p-5 shadow-sm">
+        <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#EAE0CF]">
           <div className="flex items-center gap-2.5">
-            <Wrench className="w-4 h-4 text-[#1F2E4A] shrink-0" />
-            <h2 className="text-sm font-bold text-[#343A40]">Tabel Rincian Part</h2>
+            <Wrench className="w-4 h-4 text-[#547792] shrink-0" />
+            <h2 className="text-sm font-bold text-[#213448]">Tabel Rincian Part</h2>
           </div>
           <button
             type="button"
             onClick={() => handleAddLineItem('sparepartList')}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#1F2E4A] bg-[#F8F9FA] hover:bg-[#CED4DA]/45 border border-[#CED4DA] rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#213448] bg-[#94B4C1]/20 hover:bg-[#94B4C1]/35 border border-[#94B4C1]/60 rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0"
           >
             <span>+ Tambah Part</span>
           </button>
         </div>
 
         {data.sparepartList.length === 0 ? (
-          <div className="text-center py-6 px-4 bg-[#F8F9FA] rounded-lg border border-dashed border-[#CED4DA]">
-            <p className="text-xs text-[#343A40]/75">
+          <div className="text-center py-6 px-4 bg-[#F7F5F0] rounded-lg border border-dashed border-[#94B4C1]/60">
+            <p className="text-xs text-[#547792]">
               Belum ada rincian part. Klik <strong>+ Tambah Part</strong> atau gunakan{' '}
               <strong>Ekstrak SPO</strong>.
             </p>
@@ -418,10 +418,10 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
               return (
                 <div
                   key={item.id}
-                  className="p-3 bg-[#F8F9FA] rounded-lg border border-[#CED4DA] space-y-2.5"
+                  className="p-3 bg-[#F7F5F0]/80 rounded-lg border border-[#94B4C1]/40 space-y-2.5"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-[#343A40]/70 w-5 shrink-0 tabular-nums">
+                    <span className="text-xs font-bold text-[#547792] w-5 shrink-0 tabular-nums">
                       {index + 1}.
                     </span>
                     <input
@@ -443,7 +443,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                       type="button"
                       onClick={() => handleRemoveLineItem('sparepartList', item.id)}
                       aria-label={`Hapus Part PKB ${index + 1}`}
-                      className="p-1.5 text-[#343A40]/55 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                      className="p-1.5 text-[#94B4C1] hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -451,7 +451,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
 
                   <div className="grid grid-cols-12 gap-2 items-center pl-7">
                     <div className="col-span-3">
-                      <label className="block text-[10px] font-medium text-[#343A40]/75 mb-0.5">
+                      <label className="block text-[10px] font-medium text-[#547792] mb-0.5">
                         Qty
                       </label>
                       <input
@@ -468,11 +468,11 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                             e.target.value
                           )
                         }
-                        className="w-full px-2.5 py-1 text-xs text-[#343A40] bg-white border border-[#CED4DA] rounded-md tabular-nums focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15"
+                        className="w-full px-2.5 py-1 text-xs text-[#213448] bg-white border border-[#94B4C1]/60 rounded-md tabular-nums focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40"
                       />
                     </div>
                     <div className="col-span-5">
-                      <label className="block text-[10px] font-medium text-[#343A40]/75 mb-0.5">
+                      <label className="block text-[10px] font-medium text-[#547792] mb-0.5">
                         Harga Satuan (Rp)
                       </label>
                       <input
@@ -489,14 +489,14 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                             e.target.value
                           )
                         }
-                        className="w-full px-2.5 py-1 text-xs text-[#343A40] bg-white border border-[#CED4DA] rounded-md tabular-nums focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15"
+                        className="w-full px-2.5 py-1 text-xs text-[#213448] bg-white border border-[#94B4C1]/60 rounded-md tabular-nums focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40"
                       />
                     </div>
                     <div className="col-span-4 text-right">
-                      <div className="text-[10px] font-medium text-[#343A40]/75 mb-0.5">
+                      <div className="text-[10px] font-medium text-[#547792] mb-0.5">
                         Biaya Jasa
                       </div>
-                      <div className="text-xs font-bold text-[#343A40] tabular-nums">
+                      <div className="text-xs font-bold text-[#213448] tabular-nums">
                         Rp {formatCurrencyComma(rowTotal)}
                       </div>
                     </div>
@@ -507,16 +507,16 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
           </div>
         )}
 
-        <div className="mt-3 pt-3 border-t border-[#CED4DA] flex items-center justify-between text-xs">
-          <span className="font-semibold text-[#343A40]/80">Sub. Total Part</span>
-          <span className="font-bold text-[#343A40] tabular-nums">
+        <div className="mt-3 pt-3 border-t border-[#EAE0CF] flex items-center justify-between text-xs">
+          <span className="font-semibold text-[#547792]">Sub. Total Part</span>
+          <span className="font-bold text-[#213448] tabular-nums">
             Rp {formatCurrencyComma(totals.subTotalPart)}
           </span>
         </div>
 
-        <div className="mt-3 pt-3 border-t border-[#CED4DA] flex items-center justify-between">
-          <span className="text-xs font-bold text-[#343A40] uppercase">Total PKB</span>
-          <span className="text-base font-bold text-[#1F2E4A] tabular-nums">
+        <div className="mt-3 pt-3 border-t border-[#94B4C1]/40 flex items-center justify-between">
+          <span className="text-xs font-bold text-[#213448] uppercase">Total PKB</span>
+          <span className="text-base font-bold text-[#547792] tabular-nums">
             Rp {formatCurrencyComma(totals.grandTotal)}
           </span>
         </div>

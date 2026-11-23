@@ -237,7 +237,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] text-[#343A40] flex flex-col lg:flex-row print:min-h-0 print:h-auto print:block print:bg-white">
+    <div className="min-h-screen bg-[#F7F5F0] text-[#213448] flex flex-col lg:flex-row">
       {/* Kolom Kiri: Collapsible Sidebar Navigasi */}
       <Sidebar
         activePage={activePage}
@@ -253,9 +253,9 @@ export default function App() {
       />
 
       {/* Kolom Kanan: Area Kerja Utama */}
-      <div className="flex-1 flex flex-col min-w-0 print:block">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Top Bar */}
-        <header className="no-print sticky top-0 z-30 bg-white border-b border-[#CED4DA] px-4 lg:px-5 py-3 flex flex-wrap xl:flex-nowrap items-center justify-between gap-3">
+        <header className="no-print sticky top-0 z-30 bg-white border-b border-[#94B4C1]/40 px-4 lg:px-5 py-3 flex flex-wrap xl:flex-nowrap items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">
             <button
               type="button"
@@ -263,17 +263,17 @@ export default function App() {
               aria-label={isSidebarOpen ? 'Perkecil Sidebar' : 'Perluas Sidebar'}
               title={isSidebarOpen ? 'Perkecil Sidebar' : 'Perluas Sidebar'}
               data-testid="topbar-sidebar-toggle"
-              className="p-1.5 rounded-lg text-[#343A40] hover:text-[#1F2E4A] hover:bg-[#F8F9FA] border border-[#CED4DA] transition-colors shrink-0 cursor-pointer"
+              className="p-1.5 rounded-lg text-[#547792] hover:text-[#213448] hover:bg-[#EAE0CF]/40 border border-[#94B4C1]/50 transition-colors shrink-0 cursor-pointer"
             >
               <PanelLeft className="w-4 h-4" />
             </button>
-            <h2 className="text-base font-bold text-[#343A40] whitespace-nowrap">
+            <h2 className="text-base font-bold text-[#213448] whitespace-nowrap">
               {activePage === 'INVOICE'
                 ? 'Buat Invoice'
                 : 'Buat PKB (Perintah Kerja Bengkel)'}
             </h2>
             <span
-              className="text-xs font-mono bg-[#CED4DA]/45 text-[#343A40] px-2.5 py-1 rounded-md border border-[#CED4DA] truncate"
+              className="text-xs font-mono bg-[#EAE0CF]/50 text-[#213448] px-2.5 py-1 rounded-md border border-[#94B4C1]/30 truncate"
               data-testid="topbar-target-filename"
               title={targetFilename}
             >
@@ -286,21 +286,21 @@ export default function App() {
             <button
               type="button"
               onClick={() => setIsSpoModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-[#343A40] hover:bg-[#212529] rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#EAE0CF] bg-[#213448] hover:bg-[#547792] hover:text-white rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <FileSearch className="w-3.5 h-3.5" />
               <span>Ekstrak SPO</span>
             </button>
 
             {/* Pemilih Template Desain (Default vs New Gen) tepat di sebelah Reset Form */}
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#CED4DA] hover:bg-[#F8F9FA] rounded-lg transition-colors shrink-0">
-              <LayoutTemplate className="w-3.5 h-3.5 text-[#343A40] shrink-0" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#94B4C1] hover:bg-[#EAE0CF]/30 rounded-lg transition-colors shrink-0">
+              <LayoutTemplate className="w-3.5 h-3.5 text-[#547792] shrink-0" />
               <select
                 aria-label="Template Desain"
                 data-testid="template-style-select"
                 value={templateStyle}
                 onChange={(e) => setTemplateStyle(parseTemplateStyle(e.target.value))}
-                className="text-xs font-semibold text-[#343A40] bg-transparent focus:outline-none cursor-pointer pr-0.5"
+                className="text-xs font-semibold text-[#213448] bg-transparent focus:outline-none cursor-pointer pr-0.5"
               >
                 <option value="default">Default</option>
                 <option value="newgen">New Gen</option>
@@ -310,7 +310,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setIsResetConfirmOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#343A40] bg-white hover:bg-[#CED4DA]/35 border border-[#CED4DA] rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#213448] bg-white hover:bg-[#EAE0CF]/30 border border-[#94B4C1] rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset Form</span>
@@ -319,7 +319,7 @@ export default function App() {
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#343A40] bg-white hover:bg-[#CED4DA]/35 border border-[#CED4DA] rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#213448] bg-white hover:bg-[#EAE0CF]/30 border border-[#94B4C1] rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Cetak Printer</span>
@@ -328,7 +328,7 @@ export default function App() {
             <button
               type="button"
               onClick={handleDownloadPdf}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-[#1F2E4A] hover:bg-[#2A3E63] rounded-lg shadow-xs transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-[#547792] hover:bg-[#213448] rounded-lg shadow-xs transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
               <span>
@@ -345,18 +345,18 @@ export default function App() {
           <div
             role="status"
             data-testid="app-toast"
-            className="no-print fixed bottom-5 right-5 z-40 flex items-center gap-2.5 px-4 py-3 rounded-xl bg-[#1F2E4A] text-white text-xs font-medium shadow-lg border border-[#CED4DA]/30"
+            className="no-print fixed bottom-5 right-5 z-40 flex items-center gap-2.5 px-4 py-3 rounded-xl bg-[#213448] text-[#EAE0CF] text-xs font-medium shadow-lg border border-[#547792]"
           >
-            <CheckCircle2 className="w-4 h-4 text-[#CED4DA] shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-[#94B4C1] shrink-0" />
             <span>{toastMessage}</span>
           </div>
         )}
 
         {/* Workspace (Grid 2 Panel: Panel Kiri Form Input & Panel Kanan Live Preview Kertas A4) */}
-        <main className="flex-1 p-5 lg:p-6 print:p-0 print:block">
+        <main className="flex-1 p-5 lg:p-6">
           {/* Tab Switcher Mobile (Form Input / Preview A4) */}
           <div
-            className="no-print xl:hidden grid grid-cols-2 gap-2 mb-5 p-1 rounded-xl bg-white border border-[#CED4DA] shadow-xs"
+            className="no-print xl:hidden grid grid-cols-2 gap-2 mb-5 p-1 rounded-xl bg-white border border-[#94B4C1]/40 shadow-xs"
             role="tablist"
             aria-label="Tampilan Mobile"
           >
@@ -368,8 +368,8 @@ export default function App() {
               onClick={() => setMobileTab('FORM')}
               className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                 mobileTab === 'FORM'
-                  ? 'bg-[#1F2E4A] text-white'
-                  : 'bg-[#F8F9FA] text-[#343A40] hover:bg-[#CED4DA]/45'
+                  ? 'bg-[#213448] text-white'
+                  : 'bg-[#EAE0CF]/40 text-[#213448] hover:bg-[#EAE0CF]/70'
               }`}
             >
               Form Input
@@ -382,15 +382,15 @@ export default function App() {
               onClick={() => setMobileTab('PREVIEW')}
               className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                 mobileTab === 'PREVIEW'
-                  ? 'bg-[#1F2E4A] text-white'
-                  : 'bg-[#F8F9FA] text-[#343A40] hover:bg-[#CED4DA]/45'
+                  ? 'bg-[#213448] text-white'
+                  : 'bg-[#EAE0CF]/40 text-[#213448] hover:bg-[#EAE0CF]/70'
               }`}
             >
               Preview A4
             </button>
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start print:block">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
             {/* Panel Kiri: Form Pengaturan & Input */}
             <div
               className={`no-print xl:col-span-5 ${
@@ -409,24 +409,24 @@ export default function App() {
               )}
             </div>
 
-            {/* Panel Kanan: Live Preview Kertas A4 (Kertas putih murni #FFFFFF di dalam area #F8F9FA) */}
+            {/* Panel Kanan: Live Preview Kertas A4 (Kertas putih #FFFFFF di dalam bingkai #EAE0CF/35) */}
             <div
               className={`xl:col-span-7 print-only-container ${
                 mobileTab === 'PREVIEW' ? 'block' : 'hidden xl:block'
               }`}
             >
-              <div className="print-only-container bg-[#F8F9FA] rounded-2xl p-4 sm:p-5 border border-[#CED4DA] overflow-x-auto">
+              <div className="print-only-container bg-[#EAE0CF]/35 rounded-2xl p-4 sm:p-5 border border-[#94B4C1]/35 overflow-x-auto">
                 <div className="no-print flex items-center justify-between mb-3 px-1">
-                  <span className="text-xs font-semibold text-[#343A40]">
+                  <span className="text-xs font-semibold text-[#213448]">
                     {activePage === 'INVOICE'
                       ? 'Live Preview Kertas A4 Invoice (Identik Cetak & PDF Vektor)'
                       : 'Live Preview Kertas A4 PKB (Identik Cetak & PDF Vektor)'}
                   </span>
-                  <span className="text-xs font-mono text-[#343A40]/75 tabular-nums">
+                  <span className="text-xs font-mono text-[#547792] tabular-nums">
                     210mm × 297mm
                   </span>
                 </div>
-                <div className="min-w-[210mm] print-only-container">
+                <div className="min-w-[680px] print-only-container">
                   {activePage === 'INVOICE' ? (
                     <InvoicePaperPreview
                       data={invoiceData}
@@ -469,41 +469,37 @@ export default function App() {
       {/* Modal Konfirmasi Reset Form */}
       {isResetConfirmOpen && (
         <div
-          className="no-print fixed inset-0 z-50 bg-[#1F2E4A]/55 backdrop-blur-xs flex items-center justify-center p-4"
+          className="no-print fixed inset-0 z-50 bg-[#213448]/60 backdrop-blur-xs flex items-center justify-center p-4"
           role="dialog"
           aria-modal="true"
           aria-labelledby="reset-modal-title"
         >
-          <div className="bg-white rounded-xl border border-[#CED4DA] shadow-xl w-full max-w-md overflow-hidden">
-            <div className="px-6 py-3.5 bg-[#1F2E4A] text-white">
-              <h3 id="reset-modal-title" className="text-sm font-bold text-white">
-                {activePage === 'INVOICE'
-                  ? 'Konfirmasi Reset Form Invoice'
-                  : 'Konfirmasi Reset Form PKB'}
-              </h3>
-            </div>
-            <div className="p-6">
-              <p className="text-xs text-[#343A40] leading-relaxed">
-                Apakah Anda yakin ingin mengosongkan seluruh input pada form{' '}
-                {activePage === 'INVOICE' ? 'Invoice' : 'PKB'} ini? Data yang tersimpan
-                otomatis di browser akan direset ke pengaturan awal.
-              </p>
-              <div className="mt-5 flex items-center justify-end gap-2.5">
-                <button
-                  type="button"
-                  onClick={() => setIsResetConfirmOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-[#343A40] bg-white hover:bg-[#F8F9FA] border border-[#CED4DA] rounded-lg transition-colors cursor-pointer"
-                >
-                  Batal
-                </button>
-                <button
-                  type="button"
-                  onClick={handleConfirmReset}
-                  className="px-4 py-2 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors cursor-pointer"
-                >
-                  Ya, Reset Form
-                </button>
-              </div>
+          <div className="bg-white rounded-xl border border-[#94B4C1]/40 shadow-xl w-full max-w-md p-6">
+            <h3 id="reset-modal-title" className="text-base font-bold text-[#213448]">
+              {activePage === 'INVOICE'
+                ? 'Konfirmasi Reset Form Invoice'
+                : 'Konfirmasi Reset Form PKB'}
+            </h3>
+            <p className="text-xs text-[#547792] mt-2 leading-relaxed">
+              Apakah Anda yakin ingin mengosongkan seluruh input pada form{' '}
+              {activePage === 'INVOICE' ? 'Invoice' : 'PKB'} ini? Data yang tersimpan
+              otomatis di browser akan direset ke pengaturan awal.
+            </p>
+            <div className="mt-5 flex items-center justify-end gap-2.5">
+              <button
+                type="button"
+                onClick={() => setIsResetConfirmOpen(false)}
+                className="px-4 py-2 text-xs font-semibold text-[#213448] bg-white hover:bg-[#EAE0CF]/30 border border-[#94B4C1] rounded-lg transition-colors"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmReset}
+                className="px-4 py-2 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+              >
+                Ya, Reset Form
+              </button>
             </div>
           </div>
         </div>

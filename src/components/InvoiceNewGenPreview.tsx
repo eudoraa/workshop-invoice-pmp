@@ -24,30 +24,30 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
     subtotalAmount: number
   ) => {
     return (
-      <div className="mt-[16px]">
+      <div className="mt-4">
         {/* Section Title with 3px left border accent */}
-        <div className="border-l-[3px] border-[#1e293b] pl-2.5 text-[10.5pt] font-bold uppercase text-[#0f172a] leading-tight mb-2">
+        <div className="border-l-[3px] border-[#1e293b] pl-2 text-[10pt] font-bold uppercase text-[#0f172a] leading-tight mb-2">
           {sectionTitle}
         </div>
 
-        <table className="w-full border-collapse text-[10pt] leading-snug text-[#0f172a]">
+        <table className="w-full border-collapse text-[9pt] leading-snug text-[#0f172a]">
           <thead>
             <tr className="bg-[#f8fafc] border-t-[1.5px] border-b-[1.5px] border-[#1e293b]">
-              <th className="py-[8px] px-[6px] text-left font-bold w-[6%] uppercase text-[9.5pt]">
+              <th className="py-1.5 px-2 text-left font-bold w-[6%] uppercase text-[8.5pt]">
                 NO
               </th>
-              <th className="py-[8px] px-[6px] text-left font-bold w-[44%] uppercase text-[9.5pt]">
+              <th className="py-1.5 px-2 text-left font-bold w-[46%] uppercase text-[8.5pt]">
                 {columnTitle}
               </th>
-              <th className="py-[8px] px-[6px] text-right font-bold w-[21%] uppercase text-[9.5pt] leading-tight">
+              <th className="py-1.5 px-2 text-right font-bold w-[20%] uppercase text-[8.5pt] leading-tight">
                 HARGA
                 <br />
                 SATUAN
               </th>
-              <th className="py-[8px] px-[6px] text-center font-bold w-[8%] uppercase text-[9.5pt]">
+              <th className="py-1.5 px-1 text-center font-bold w-[8%] uppercase text-[8.5pt]">
                 QTY
               </th>
-              <th className="py-[8px] px-[6px] text-right font-bold w-[21%] uppercase text-[9.5pt]">
+              <th className="py-1.5 px-2 text-right font-bold w-[20%] uppercase text-[8.5pt]">
                 JUMLAH
               </th>
             </tr>
@@ -55,16 +55,16 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
           <tbody>
             {items.length === 0 ? (
               <tr className="border-b border-[#e2e8f0]">
-                <td className="py-[8px] px-[6px] text-left">-</td>
-                <td className="py-[8px] px-[6px] text-left">-</td>
-                <td className="py-[8px] px-[6px]">
+                <td className="py-2 px-2 text-left">-</td>
+                <td className="py-2 px-2 text-left">-</td>
+                <td className="py-2 px-2">
                   <div className="flex items-center justify-between tabular-nums">
                     <span>Rp</span>
                     <span>0</span>
                   </div>
                 </td>
-                <td className="py-[8px] px-[6px] text-center tabular-nums">0</td>
-                <td className="py-[8px] px-[6px]">
+                <td className="py-2 px-1 text-center tabular-nums">0</td>
+                <td className="py-2 px-2">
                   <div className="flex items-center justify-between tabular-nums">
                     <span>Rp</span>
                     <span>0</span>
@@ -78,22 +78,22 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
                 const amount = unitPrice * qty;
                 return (
                   <tr key={item.id} className="border-b border-[#e2e8f0]">
-                    <td className="py-[8px] px-[6px] text-left align-top tabular-nums">
+                    <td className="py-2 px-2 text-left align-top tabular-nums">
                       {idx + 1}
                     </td>
-                    <td className="py-[8px] px-[6px] text-left align-top break-words">
+                    <td className="py-2 px-2 text-left align-top break-words">
                       {item.nama || '-'}
                     </td>
-                    <td className="py-[8px] px-[6px] align-top">
+                    <td className="py-2 px-2 align-top">
                       <div className="flex items-center justify-between gap-1 tabular-nums">
                         <span>Rp</span>
                         <span>{formatCurrencyComma(unitPrice)}</span>
                       </div>
                     </td>
-                    <td className="py-[8px] px-[6px] text-center align-top tabular-nums">
+                    <td className="py-2 px-1 text-center align-top tabular-nums">
                       {qty}
                     </td>
-                    <td className="py-[8px] px-[6px] align-top">
+                    <td className="py-2 px-2 align-top">
                       <div className="flex items-center justify-between gap-1 tabular-nums">
                         <span>Rp</span>
                         <span>{formatCurrencyComma(amount)}</span>
@@ -107,11 +107,11 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
         </table>
 
         {/* Subtotal Row aligned to right */}
-        <div className="flex items-center text-[10pt] pt-2">
-          <div className="w-[79%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
+        <div className="flex items-center text-[9pt] pt-2">
+          <div className="w-[80%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
             {subtotalLabel} :
           </div>
-          <div className="w-[21%] px-[6px] flex items-center justify-between font-bold text-[#0f172a] tabular-nums">
+          <div className="w-[20%] px-2 flex items-center justify-between font-bold text-[#0f172a] tabular-nums">
             <span>Rp</span>
             <span>{formatCurrencyComma(subtotalAmount)}</span>
           </div>
@@ -125,7 +125,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
       id="a4-invoice-preview"
       data-testid="a4-invoice-preview"
       data-template-style="newgen"
-      className="a4-invoice-sheet bg-white text-[#0f172a] mx-auto shadow-md border border-slate-200 w-[210mm] min-w-[210mm] max-w-[210mm] min-h-[297mm] p-[15mm] box-border"
+      className="a4-invoice-sheet bg-white text-[#0f172a] mx-auto shadow-md border border-slate-200 w-full max-w-[210mm] min-h-[297mm] px-[15mm] py-[14mm] box-border"
       style={{
         fontFamily: 'Arial, Helvetica, Calibri, sans-serif',
       }}
@@ -140,32 +140,32 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
 
       {/* 2. DUA KARTU INFORMASI (KEPADA YTH & INFORMASI BENGKEL) */}
       <div
-        className="mt-4 grid gap-[14px]"
-        style={{ gridTemplateColumns: '1.22fr 1fr' }}
+        className="mt-3.5 grid gap-[14px]"
+        style={{ gridTemplateColumns: '1.25fr 1fr' }}
       >
         {/* Left Card: KEPADA YTH */}
-        <div className="border border-[#cbd5e1] rounded-[6px] px-[14px] py-[12px]">
+        <div className="border border-[#cbd5e1] rounded-[6px] px-[12px] py-[10px]">
           <div className="text-[8.5pt] font-semibold uppercase tracking-wider text-[#64748b] pb-1.5 mb-2 border-b border-[#cbd5e1]">
             KEPADA YTH
           </div>
           <div
-            className="text-[10pt] font-bold text-[#0f172a] leading-snug"
+            className="text-[9.5pt] font-bold text-[#0f172a] leading-snug"
             data-testid="preview-client-name"
           >
             {data.namaKlien || '-'}
           </div>
-          <div className="text-[9.5pt] text-[#475569] leading-[1.45] mt-1">
+          <div className="text-[8.5pt] text-[#475569] leading-[1.4] mt-1">
             <div>{data.alamatBaris1}</div>
             <div>{data.alamatBaris2}</div>
           </div>
         </div>
 
         {/* Right Card: INFORMASI BENGKEL */}
-        <div className="border border-[#cbd5e1] rounded-[6px] px-[14px] py-[12px]">
+        <div className="border border-[#cbd5e1] rounded-[6px] px-[12px] py-[10px]">
           <div className="text-[8.5pt] font-semibold uppercase tracking-wider text-[#64748b] pb-1.5 mb-2 border-b border-[#cbd5e1]">
             INFORMASI BENGKEL
           </div>
-          <div className="space-y-1 text-[9.5pt] leading-[1.4]">
+          <div className="space-y-1 text-[8.5pt] leading-[1.35]">
             <div className="grid grid-cols-12">
               <span className="col-span-4 text-[#475569]">Hal</span>
               <span className="col-span-8 font-medium text-[#0f172a]">
@@ -200,50 +200,50 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
       </div>
 
       {/* 3. STRIP DATA KENDARAAN */}
-      <div className="mt-4 bg-[#f8fafc] border border-[#cbd5e1] rounded-[6px] px-[14px] py-[12px]">
+      <div className="mt-3.5 bg-[#f8fafc] border border-[#cbd5e1] rounded-[6px] px-[12px] py-[8px]">
         <div
           className="grid gap-3"
-          style={{ gridTemplateColumns: '0.95fr 1.35fr 0.55fr 1.4fr' }}
+          style={{ gridTemplateColumns: '0.95fr 1.35fr 0.6fr 1.35fr' }}
         >
           <div>
-            <div className="text-[8pt] font-semibold uppercase tracking-wider text-[#64748b]">
+            <div className="text-[7.5pt] font-semibold uppercase tracking-wider text-[#64748b]">
               NO. POLISI
             </div>
             <div
-              className="text-[10pt] font-bold text-[#0f172a] mt-1 whitespace-nowrap"
+              className="text-[9pt] font-bold text-[#0f172a] mt-0.5 whitespace-nowrap"
               data-testid="preview-no-polisi"
             >
               {data.noPolisi || '-'}
             </div>
           </div>
           <div>
-            <div className="text-[8pt] font-semibold uppercase tracking-wider text-[#64748b]">
+            <div className="text-[7.5pt] font-semibold uppercase tracking-wider text-[#64748b]">
               MODEL KENDARAAN
             </div>
             <div
-              className="text-[10pt] font-bold text-[#0f172a] mt-1"
+              className="text-[9pt] font-bold text-[#0f172a] mt-0.5"
               data-testid="preview-model"
             >
               {data.model || '-'}
             </div>
           </div>
           <div>
-            <div className="text-[8pt] font-semibold uppercase tracking-wider text-[#64748b]">
+            <div className="text-[7.5pt] font-semibold uppercase tracking-wider text-[#64748b]">
               TAHUN
             </div>
             <div
-              className="text-[10pt] font-bold text-[#0f172a] mt-1 whitespace-nowrap"
+              className="text-[9pt] font-bold text-[#0f172a] mt-0.5 whitespace-nowrap"
               data-testid="preview-tahun"
             >
               {data.tahun || '-'}
             </div>
           </div>
           <div>
-            <div className="text-[8pt] font-semibold uppercase tracking-wider text-[#64748b]">
+            <div className="text-[7.5pt] font-semibold uppercase tracking-wider text-[#64748b]">
               NOMOR SPO
             </div>
             <div
-              className="text-[10pt] font-bold text-[#0f172a] mt-1 whitespace-nowrap"
+              className="text-[9pt] font-bold text-[#0f172a] mt-0.5 whitespace-nowrap"
               data-testid="preview-nomor-spo"
             >
               {data.nomorSpo || '-'}
@@ -272,13 +272,13 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
       {/* Optional Tax Rows (PPN & PPh 23) */}
       {data.enablePpn && (
         <div
-          className="flex items-center text-[10pt] pt-2"
+          className="flex items-center text-[9pt] pt-1.5"
           data-testid="preview-ppn-row"
         >
-          <div className="w-[79%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
+          <div className="w-[80%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
             PPN ({data.ppnRate}%) :
           </div>
-          <div className="w-[21%] px-[6px] flex items-center justify-between font-bold text-[#0f172a] tabular-nums">
+          <div className="w-[20%] px-2 flex items-center justify-between font-bold text-[#0f172a] tabular-nums">
             <span>Rp</span>
             <span>{formatCurrencyComma(totals.ppnAmount)}</span>
           </div>
@@ -287,65 +287,65 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
 
       {data.enablePph && (
         <div
-          className="flex items-center text-[10pt] pt-2"
+          className="flex items-center text-[9pt] pt-1.5"
           data-testid="preview-pph-row"
         >
-          <div className="w-[79%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
+          <div className="w-[80%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
             PPh 23 ({data.pphRate}%) :
           </div>
-          <div className="w-[21%] px-[6px] flex items-center justify-between font-bold text-[#0f172a] tabular-nums">
+          <div className="w-[20%] px-2 flex items-center justify-between font-bold text-[#0f172a] tabular-nums">
             <span>Rp</span>
             <span>-{formatCurrencyComma(totals.pphAmount)}</span>
           </div>
         </div>
       )}
 
-      {/* 5. BAGIAN BAWAH (ALUR ALAMI TEPAT DI BAWAH TABEL: 20px GAP) */}
-      <div className="mt-[20px] pt-[18px] border-t-[1.5px] border-[#1e293b] flex items-start justify-between gap-6">
+      {/* 5. BAGIAN BAWAH: DIVIDER TEGAS, INFORMASI BANK, KOTAK TOTAL, & TANDA TANGAN LUAS */}
+      <div className="mt-4 pt-4 border-t-[1.5px] border-[#1e293b] flex items-start justify-between gap-6">
         {/* Left: Kartu Informasi Bank */}
-        <div className="w-[46%] bg-[#f8fafc] border border-[#cbd5e1] rounded-[6px] px-[14px] py-[12px]">
+        <div className="w-[46%] bg-[#f8fafc] border border-[#cbd5e1] rounded-[6px] px-[14px] py-[10px]">
           <div className="text-[8.5pt] font-semibold uppercase tracking-wider text-[#64748b] mb-2">
             INFORMASI BANK
           </div>
-          <div className="text-[10pt] font-bold text-[#0f172a]">
+          <div className="text-[9pt] font-bold text-[#0f172a]">
             {WORKSHOP_INFO.bankName}
           </div>
-          <div className="text-[12pt] font-bold text-[#0f172a] tabular-nums tracking-tight mt-0.5">
+          <div className="text-[11pt] font-bold text-[#0f172a] tabular-nums tracking-tight mt-0.5">
             {WORKSHOP_INFO.bankAccount}
           </div>
-          <div className="text-[9.5pt] text-[#475569] mt-1">
+          <div className="text-[8.5pt] text-[#475569] mt-0.5">
             {WORKSHOP_INFO.bankHolder}
           </div>
-          <div className="text-[9.5pt] text-[#475569]">
+          <div className="text-[8.5pt] text-[#475569]">
             {WORKSHOP_INFO.bankCity}
           </div>
         </div>
 
-        {/* Right: Kotak TOTAL + Kolom Tanda Tangan */}
+        {/* Right: Kotak TOTAL + Kolom Tanda Tangan Luas */}
         <div className="w-[46%] flex flex-col items-center">
           {/* Kotak Sorotan TOTAL */}
-          <div className="w-full bg-[#f8fafc] border-[1.5px] border-[#1e293b] rounded-[6px] px-[14px] py-[10px] flex items-center justify-between">
-            <span className="text-[10.5pt] font-bold uppercase text-[#0f172a]">
+          <div className="w-full bg-[#f8fafc] border-[1.5px] border-[#1e293b] rounded-[6px] px-[14px] py-[9px] flex items-center justify-between">
+            <span className="text-[10pt] font-bold uppercase text-[#0f172a]">
               TOTAL
             </span>
             <span
-              className="text-[13pt] font-bold text-[#0f172a] tabular-nums"
+              className="text-[12pt] font-bold text-[#0f172a] tabular-nums"
               data-testid="preview-grand-total"
             >
               Rp {formatCurrencyComma(totals.grandTotal)}
             </span>
           </div>
 
-          {/* Tanda Tangan (~26px gap, ~75px / 22mm signature space) */}
-          <div className="mt-[26px] text-center w-full">
-            <div className="text-[9.8pt] text-[#0f172a]">
+          {/* Tanda Tangan Ekstra Lega */}
+          <div className="mt-4 text-center w-full">
+            <div className="text-[9pt] text-[#0f172a]">
               Jakarta, {data.tglInv || '-'}
             </div>
-            {/* Ruang tanda tangan ~75px (~22mm) */}
-            <div className="h-[75px]" aria-hidden="true" />
-            <div className="w-[62mm] max-w-full mx-auto border-t border-[#cbd5e1] pt-2">
+            {/* Ruang tanda tangan ~28mm / 84px */}
+            <div className="h-[28mm]" aria-hidden="true" />
+            <div className="w-[60mm] max-w-full mx-auto border-t border-[#cbd5e1] pt-1.5">
               <div
-                className="text-[10.5pt] font-bold text-[#0f172a]"
+                className="text-[10pt] font-bold text-[#0f172a]"
                 data-testid="preview-signatory-name"
               >
                 {data.namaPenandatangan}

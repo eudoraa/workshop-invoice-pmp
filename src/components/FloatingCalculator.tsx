@@ -254,7 +254,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
     return (
       <div
         data-testid="floating-calculator-minimized"
-        className="print:hidden no-print fixed bottom-4 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2.5 pl-3 pr-2 py-2 rounded-xl bg-[#1F2E4A] text-white border border-[#CED4DA]/30 shadow-2xl select-none"
+        className="print:hidden no-print fixed bottom-4 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2.5 pl-3 pr-2 py-2 rounded-xl bg-[#213448] text-white border border-[#94B4C1]/40 shadow-2xl select-none"
       >
         <button
           type="button"
@@ -262,23 +262,23 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
           aria-label="Pulihkan Kalkulator"
           className="flex items-center gap-2.5 pr-2 text-left cursor-pointer hover:opacity-90 transition-opacity"
         >
-          <span className="w-6 h-6 rounded-md bg-[#2B3F64] flex items-center justify-center shrink-0">
+          <span className="w-6 h-6 rounded-md bg-[#547792] flex items-center justify-center shrink-0">
             <Calculator className="w-3.5 h-3.5 text-white" />
           </span>
-          <span className="text-xs font-semibold text-[#F8F9FA] whitespace-nowrap">
+          <span className="text-xs font-semibold text-[#EAE0CF] whitespace-nowrap">
             Calculator
           </span>
-          <span className="text-xs font-mono font-bold text-white bg-[#162238] px-2 py-0.5 rounded border border-[#CED4DA]/25 max-w-[120px] truncate tabular-nums">
+          <span className="text-xs font-mono font-bold text-white bg-[#182736] px-2 py-0.5 rounded border border-[#94B4C1]/30 max-w-[120px] truncate tabular-nums">
             {formattedMain}
           </span>
-          <Maximize2 className="w-3.5 h-3.5 text-[#CED4DA] shrink-0" />
+          <Maximize2 className="w-3.5 h-3.5 text-[#94B4C1] shrink-0" />
         </button>
         <button
           type="button"
           onClick={onClose}
           aria-label="Tutup Kalkulator"
           title="Tutup"
-          className="p-1.5 rounded-md text-[#CED4DA] hover:text-white hover:bg-red-600/80 transition-colors cursor-pointer"
+          className="p-1.5 rounded-md text-[#94B4C1] hover:text-white hover:bg-red-600/80 transition-colors cursor-pointer"
         >
           <X className="w-3.5 h-3.5" />
         </button>
@@ -305,13 +305,13 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
   const handleClearHistory = () => onStateChange((prev) => clearHistory(prev));
 
   const numberBtnClass =
-    'h-12 rounded-md bg-white hover:bg-[#F8F9FA] active:bg-[#CED4DA]/45 border border-[#CED4DA] shadow-[0_1px_1px_rgba(31,46,74,0.05)] text-[15px] font-semibold text-[#343A40] flex items-center justify-center transition-colors cursor-pointer tabular-nums';
+    'h-12 rounded-md bg-white hover:bg-[#F9F9F9] active:bg-[#EAE0CF]/40 border border-[#94B4C1]/30 shadow-[0_1px_1px_rgba(33,52,72,0.05)] text-[15px] font-semibold text-[#213448] flex items-center justify-center transition-colors cursor-pointer tabular-nums';
   const funcBtnClass =
-    'h-12 rounded-md bg-[#F8F9FA] hover:bg-[#CED4DA]/45 active:bg-[#CED4DA]/75 border border-[#CED4DA] shadow-[0_1px_1px_rgba(31,46,74,0.04)] text-[13px] font-medium text-[#343A40] flex items-center justify-center transition-colors cursor-pointer';
+    'h-12 rounded-md bg-[#F9F9F9] hover:bg-[#EAE0CF]/45 active:bg-[#EAE0CF]/70 border border-[#94B4C1]/30 shadow-[0_1px_1px_rgba(33,52,72,0.04)] text-[13px] font-medium text-[#213448] flex items-center justify-center transition-colors cursor-pointer';
   const opBtnClass =
-    'h-12 rounded-md bg-[#F8F9FA] hover:bg-[#CED4DA]/45 active:bg-[#CED4DA]/75 border border-[#CED4DA] shadow-[0_1px_1px_rgba(31,46,74,0.04)] text-lg font-medium text-[#343A40] flex items-center justify-center transition-colors cursor-pointer';
+    'h-12 rounded-md bg-[#F9F9F9] hover:bg-[#EAE0CF]/45 active:bg-[#EAE0CF]/70 border border-[#94B4C1]/30 shadow-[0_1px_1px_rgba(33,52,72,0.04)] text-lg font-medium text-[#213448] flex items-center justify-center transition-colors cursor-pointer';
   const equalsBtnClass =
-    'h-12 rounded-md bg-[#1F2E4A] hover:bg-[#2A3E63] active:bg-[#162238] text-white text-lg font-semibold flex items-center justify-center shadow-xs transition-colors cursor-pointer';
+    'h-12 rounded-md bg-[#547792] hover:bg-[#213448] active:bg-[#182736] text-white text-lg font-semibold flex items-center justify-center shadow-xs transition-colors cursor-pointer';
 
   const positionedStyle: React.CSSProperties | undefined = position
     ? { left: `${position.x}px`, top: `${position.y}px` }
@@ -324,7 +324,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
       role="region"
       aria-label="Kalkulator Standar"
       style={positionedStyle}
-      className={`print:hidden no-print fixed z-50 w-[calc(100vw-24px)] max-w-[324px] rounded-xl bg-[#F8F9FA] border border-[#CED4DA] shadow-[0_18px_45px_rgba(31,46,74,0.22)] overflow-hidden select-none flex flex-col ${
+      className={`print:hidden no-print fixed z-50 w-[calc(100vw-24px)] max-w-[324px] rounded-xl bg-[#F3F3F3] border border-[#94B4C1]/65 shadow-[0_18px_45px_rgba(33,52,72,0.22)] overflow-hidden select-none flex flex-col ${
         position
           ? ''
           : 'bottom-4 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:bottom-6 sm:right-6'
@@ -334,13 +334,13 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
       <div
         data-testid="calculator-titlebar"
         onPointerDown={handleTitleBarPointerDown}
-        className={`flex items-center justify-between px-3 py-2 bg-[#F8F9FA] border-b border-[#CED4DA] ${
+        className={`flex items-center justify-between px-3 py-2 bg-[#F3F3F3] border-b border-[#94B4C1]/25 ${
           isDragging ? 'sm:cursor-grabbing' : 'sm:cursor-grab'
         }`}
       >
         <div className="flex items-center gap-2 min-w-0">
-          <Calculator className="w-3.5 h-3.5 text-[#1F2E4A] shrink-0" />
-          <span className="text-xs font-semibold text-[#343A40] truncate">
+          <Calculator className="w-3.5 h-3.5 text-[#547792] shrink-0" />
+          <span className="text-xs font-medium text-[#213448] truncate">
             Calculator
           </span>
         </div>
@@ -351,7 +351,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
             onClick={onMinimize}
             aria-label="Minimize Kalkulator"
             title="Minimize"
-            className="w-7 h-6 rounded flex items-center justify-center text-[#343A40] hover:bg-[#CED4DA]/60 transition-colors cursor-pointer"
+            className="w-7 h-6 rounded flex items-center justify-center text-[#213448] hover:bg-[#EAE0CF]/70 transition-colors cursor-pointer"
           >
             <Minus className="w-3.5 h-3.5" />
           </button>
@@ -360,7 +360,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
             onClick={onClose}
             aria-label="Tutup Kalkulator"
             title="Tutup"
-            className="w-7 h-6 rounded flex items-center justify-center text-[#343A40] hover:bg-red-600 hover:text-white transition-colors cursor-pointer"
+            className="w-7 h-6 rounded flex items-center justify-center text-[#213448] hover:bg-red-600 hover:text-white transition-colors cursor-pointer"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -368,10 +368,10 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
       </div>
 
       {/* 2. Sub-Header Mode (Standard + History Toggle) */}
-      <div className="flex items-center justify-between px-3.5 pt-2.5 pb-1 bg-[#F8F9FA]">
+      <div className="flex items-center justify-between px-3.5 pt-2.5 pb-1">
         <div className="flex items-center gap-2.5">
-          <Menu className="w-4 h-4 text-[#1F2E4A] shrink-0" aria-hidden="true" />
-          <h3 className="text-base font-bold text-[#343A40] tracking-tight">
+          <Menu className="w-4 h-4 text-[#547792] shrink-0" aria-hidden="true" />
+          <h3 className="text-base font-bold text-[#213448] tracking-tight">
             Standard
           </h3>
         </div>
@@ -384,8 +384,8 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
           data-testid="calculator-history-toggle"
           className={`p-1.5 rounded-md transition-colors cursor-pointer ${
             isHistoryOpen
-              ? 'bg-[#1F2E4A] text-white'
-              : 'text-[#343A40] hover:bg-[#CED4DA]/55'
+              ? 'bg-[#547792] text-white'
+              : 'text-[#213448] hover:bg-[#EAE0CF]/60'
           }`}
         >
           <History className="w-4 h-4" />
@@ -393,10 +393,10 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
       </div>
 
       {/* 3. Display Area (Right Aligned + Copy) */}
-      <div className="px-4 pt-2 pb-3 text-right bg-[#F8F9FA]">
+      <div className="px-4 pt-2 pb-3 text-right">
         <div
           data-testid="calculator-expression"
-          className="text-xs text-[#343A40]/65 min-h-[18px] truncate tabular-nums"
+          className="text-xs text-[#64748b] min-h-[18px] truncate tabular-nums"
           title={state.expression}
         >
           {state.expression || '\u00A0'}
@@ -412,8 +412,8 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
             data-testid="calculator-copy-btn"
             className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium transition-colors shrink-0 cursor-pointer disabled:opacity-35 disabled:cursor-not-allowed ${
               copiedFeedback
-                ? 'bg-[#1F2E4A] text-white'
-                : 'text-[#343A40] hover:text-[#1F2E4A] hover:bg-[#CED4DA]/55'
+                ? 'bg-[#547792] text-white'
+                : 'text-[#547792] hover:text-[#213448] hover:bg-[#EAE0CF]/60'
             }`}
           >
             {copiedFeedback ? (
@@ -435,7 +435,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
             disabled={Boolean(state.error)}
             title={state.error ? state.error : 'Klik untuk menyalin angka'}
             data-testid="calculator-display"
-            className={`flex-1 text-right font-semibold text-[#1F2E4A] leading-tight truncate tabular-nums cursor-pointer disabled:cursor-default ${displayFontClass}`}
+            className={`flex-1 text-right font-semibold text-[#213448] leading-tight truncate tabular-nums cursor-pointer disabled:cursor-default ${displayFontClass}`}
           >
             {formattedMain}
           </button>
@@ -443,7 +443,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
       </div>
 
       {/* 4. Memory Row (MC, MR, M+, M-, MS) */}
-      <div className="grid grid-cols-5 gap-1 px-2 pb-1.5 bg-[#F8F9FA]">
+      <div className="grid grid-cols-5 gap-1 px-2 pb-1.5">
         {(['MC', 'MR', 'M+', 'M-', 'MS'] as MemoryOp[]).map((memOp) => {
           const isDisabled = !hasMemory && (memOp === 'MC' || memOp === 'MR');
           return (
@@ -455,8 +455,8 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
               aria-label={`Memori ${memOp}`}
               className={`h-8 rounded-md text-[11px] font-semibold transition-colors ${
                 isDisabled
-                  ? 'text-[#343A40]/35 cursor-not-allowed'
-                  : 'text-[#343A40] hover:bg-[#CED4DA]/55 active:bg-[#CED4DA] cursor-pointer'
+                  ? 'text-[#94B4C1] opacity-45 cursor-not-allowed'
+                  : 'text-[#213448] hover:bg-[#EAE0CF]/60 active:bg-[#EAE0CF] cursor-pointer'
               }`}
             >
               {memOp}
@@ -466,7 +466,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
       </div>
 
       {/* 5. Keypad + Optional Slide-Over History Panel */}
-      <div className="relative px-1.5 pb-2 bg-[#F8F9FA]">
+      <div className="relative px-1.5 pb-2">
         <div className="grid grid-cols-4 gap-[3px]">
           {/* Baris 1: %, CE, C, Backspace */}
           <button
@@ -635,10 +635,10 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
         {isHistoryOpen && (
           <div
             data-testid="calculator-history-panel"
-            className="absolute inset-0 bg-[#F8F9FA] border-t border-[#CED4DA] flex flex-col justify-between p-3"
+            className="absolute inset-0 bg-[#F9F9F9] border-t border-[#94B4C1]/40 flex flex-col justify-between p-3"
           >
-            <div className="flex items-center justify-between pb-2 border-b border-[#CED4DA]">
-              <span className="text-xs font-bold text-[#343A40]">
+            <div className="flex items-center justify-between pb-2 border-b border-[#EAE0CF]">
+              <span className="text-xs font-bold text-[#213448]">
                 Riwayat Perhitungan
               </span>
               {state.history.length > 0 && (
@@ -647,7 +647,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
                   onClick={handleClearHistory}
                   aria-label="Hapus Semua Riwayat"
                   title="Hapus Riwayat"
-                  className="p-1 rounded text-[#343A40] hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                  className="p-1 rounded text-[#547792] hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -657,7 +657,7 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
             <div className="flex-1 overflow-y-auto py-2 space-y-1.5">
               {state.history.length === 0 ? (
                 <div className="h-full flex items-center justify-center text-center px-4">
-                  <p className="text-xs text-[#343A40]/65">
+                  <p className="text-xs text-[#64748b]">
                     Belum ada riwayat perhitungan pada sesi ini.
                   </p>
                 </div>
@@ -667,12 +667,12 @@ export const FloatingCalculator: React.FC<FloatingCalculatorProps> = ({
                     key={item.id}
                     type="button"
                     onClick={() => handleSelectHistory(item)}
-                    className="w-full text-right px-2.5 py-2 rounded-lg hover:bg-[#CED4DA]/45 transition-colors cursor-pointer"
+                    className="w-full text-right px-2.5 py-2 rounded-lg hover:bg-[#EAE0CF]/55 transition-colors cursor-pointer"
                   >
-                    <div className="text-[11px] text-[#343A40]/65 truncate tabular-nums">
+                    <div className="text-[11px] text-[#64748b] truncate tabular-nums">
                       {item.expression}
                     </div>
-                    <div className="text-base font-bold text-[#1F2E4A] tabular-nums">
+                    <div className="text-base font-bold text-[#213448] tabular-nums">
                       {item.result}
                     </div>
                   </button>

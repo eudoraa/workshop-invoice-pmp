@@ -192,17 +192,17 @@ export const SpoModal: React.FC<SpoModalProps> = ({
 
   return (
     <div
-      className="no-print fixed inset-0 z-50 bg-[#1F2E4A]/55 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
+      className="no-print fixed inset-0 z-50 bg-[#213448]/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="spo-modal-title"
     >
-      <div className="bg-white rounded-2xl border border-[#CED4DA] shadow-xl w-full max-w-3xl overflow-hidden my-8">
+      <div className="bg-white rounded-2xl border border-[#94B4C1]/40 shadow-xl w-full max-w-3xl overflow-hidden my-8">
         {/* Modal Header */}
-        <div className="px-6 py-4 bg-[#1F2E4A] text-white flex items-center justify-between">
+        <div className="px-6 py-4 bg-[#213448] text-white flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <FileText className="w-5 h-5 text-[#CED4DA]" />
-            <h2 id="spo-modal-title" className="text-base font-bold text-white">
+            <FileText className="w-5 h-5 text-[#EAE0CF]" />
+            <h2 id="spo-modal-title" className="text-base font-bold">
               Ekstraksi Otomatis Dokumen SPO / PO
             </h2>
           </div>
@@ -210,7 +210,7 @@ export const SpoModal: React.FC<SpoModalProps> = ({
             type="button"
             onClick={onClose}
             aria-label="Tutup Modal Ekstraksi SPO"
-            className="p-1.5 rounded-lg text-[#CED4DA] hover:text-white hover:bg-[#2B3F64] transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-[#94B4C1] hover:text-white hover:bg-[#547792]/30 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -219,16 +219,16 @@ export const SpoModal: React.FC<SpoModalProps> = ({
         {/* Modal Body */}
         <div className="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
           {/* File Upload Dropzone */}
-          <div className="p-4 rounded-xl bg-[#F8F9FA] border border-dashed border-[#CED4DA] hover:border-[#1F2E4A] transition-colors flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="p-4 rounded-xl bg-[#F7F5F0] border border-dashed border-[#94B4C1] hover:border-[#547792] transition-colors flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[#CED4DA]/50 text-[#1F2E4A] flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-[#EAE0CF] text-[#213448] flex items-center justify-center shrink-0">
                 <FileUp className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-sm font-bold text-[#343A40]">
+                <div className="text-sm font-bold text-[#213448]">
                   Unggah File PDF atau Gambar SPO / PO
                 </div>
-                <p className="text-xs text-[#343A40]/75 mt-0.5">
+                <p className="text-xs text-[#547792] mt-0.5">
                   Mendukung format dokumen SPO GoFleet (PT Solusi Mobilitas Bangsa) &
                   SPO OLXMobbi (PT. Serasi Mitra Mobil)
                 </p>
@@ -246,7 +246,7 @@ export const SpoModal: React.FC<SpoModalProps> = ({
               />
               <label
                 htmlFor="spo-file-upload"
-                className="px-4 py-2 text-xs font-semibold text-white bg-[#1F2E4A] hover:bg-[#2A3E63] rounded-lg cursor-pointer transition-colors whitespace-nowrap"
+                className="px-4 py-2 text-xs font-semibold text-white bg-[#547792] hover:bg-[#213448] rounded-lg cursor-pointer transition-colors whitespace-nowrap"
               >
                 Pilih File SPO
               </label>
@@ -255,7 +255,7 @@ export const SpoModal: React.FC<SpoModalProps> = ({
                   type="button"
                   onClick={resetModalState}
                   aria-label="Bersihkan File SPO"
-                  className="p-2 text-[#343A40] hover:text-red-600 hover:bg-red-50 rounded-lg border border-[#CED4DA] transition-colors cursor-pointer"
+                  className="p-2 text-[#547792] hover:text-red-600 hover:bg-red-50 rounded-lg border border-[#94B4C1]/60 transition-colors cursor-pointer"
                   title="Bersihkan File & Teks"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -265,12 +265,12 @@ export const SpoModal: React.FC<SpoModalProps> = ({
           </div>
 
           {selectedFileName && (
-            <div className="flex items-center justify-between px-3.5 py-2 rounded-lg bg-[#F8F9FA] border border-[#CED4DA] text-xs text-[#343A40]">
+            <div className="flex items-center justify-between px-3.5 py-2 rounded-lg bg-[#EAE0CF]/45 border border-[#94B4C1]/60 text-xs text-[#213448]">
               <span className="font-medium truncate">
                 File terpilih: <strong>{selectedFileName}</strong>
               </span>
               {(isReadingPdf || isExtractingAi) && (
-                <span className="inline-flex items-center gap-1.5 text-[#1F2E4A] font-semibold">
+                <span className="inline-flex items-center gap-1.5 text-[#547792] font-semibold">
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />
                   {isReadingPdf ? 'Membaca baris PDF...' : 'Mengekstrak dengan AI...'}
                 </span>
@@ -283,7 +283,7 @@ export const SpoModal: React.FC<SpoModalProps> = ({
             <div className="flex items-center justify-between mb-1.5">
               <label
                 htmlFor="spo-raw-textarea"
-                className="text-xs font-semibold text-[#343A40]"
+                className="text-xs font-semibold text-[#213448]"
               >
                 Teks Dokumen SPO / PO (Otomatis dari PDF atau Tempel Teks SPO)
               </label>
@@ -291,7 +291,7 @@ export const SpoModal: React.FC<SpoModalProps> = ({
                 type="button"
                 disabled={isExtractingAi || (!rawText.trim() && !fileBase64)}
                 onClick={() => runGeminiExtraction(rawText, fileBase64, fileMimeType)}
-                className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-[#1F2E4A] bg-[#F8F9FA] hover:bg-[#CED4DA]/45 border border-[#CED4DA] rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-[#213448] bg-[#94B4C1]/20 hover:bg-[#94B4C1]/35 border border-[#94B4C1]/60 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
               >
                 {isExtractingAi ? (
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -307,7 +307,7 @@ export const SpoModal: React.FC<SpoModalProps> = ({
               value={rawText}
               onChange={(e) => handleRawTextChange(e.target.value)}
               placeholder="Tempelkan teks dari dokumen SPO GoFleet atau OLXMobbi di sini, atau unggah file PDF di atas..."
-              className="w-full p-3 text-xs font-mono text-[#343A40] bg-[#F8F9FA] border border-[#CED4DA] rounded-lg focus:bg-white focus:outline-none focus:border-[#1F2E4A] focus:ring-2 focus:ring-[#1F2E4A]/15"
+              className="w-full p-3 text-xs font-mono text-[#213448] bg-[#F7F5F0] border border-[#94B4C1]/60 rounded-lg focus:bg-white focus:outline-none focus:border-[#547792] focus:ring-2 focus:ring-[#94B4C1]/40"
             />
           </div>
 
@@ -321,17 +321,17 @@ export const SpoModal: React.FC<SpoModalProps> = ({
           {/* Preview Hasil Pembacaan SPO */}
           {hasValidExtraction && parsedResult && (
             <div
-              className="p-4 rounded-xl bg-[#F8F9FA] border border-[#CED4DA] space-y-4"
+              className="p-4 rounded-xl bg-[#F7F5F0] border border-[#94B4C1]/50 space-y-4"
               data-testid="spo-extraction-preview"
             >
-              <div className="flex items-center justify-between border-b border-[#CED4DA] pb-2.5">
+              <div className="flex items-center justify-between border-b border-[#EAE0CF] pb-2.5">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span className="text-xs font-bold text-[#343A40]">
+                  <span className="text-xs font-bold text-[#213448]">
                     Hasil Pembacaan Dokumen SPO
                   </span>
                 </div>
-                <span className="text-xs font-semibold text-[#1F2E4A]">
+                <span className="text-xs font-semibold text-[#547792]">
                   Preset Terdeteksi:{' '}
                   {parsedResult.presetId === 'GOFLEET'
                     ? 'SOLUSI MOBILITAS BANGSA (GoFleet)'
@@ -342,27 +342,27 @@ export const SpoModal: React.FC<SpoModalProps> = ({
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                <div className="p-2.5 bg-white rounded-lg border border-[#CED4DA]">
-                  <div className="text-[10px] text-[#343A40]/70">No. Polisi</div>
-                  <div className="font-bold text-[#343A40] mt-0.5">
+                <div className="p-2.5 bg-white rounded-lg border border-[#94B4C1]/40">
+                  <div className="text-[10px] text-[#547792]">No. Polisi</div>
+                  <div className="font-bold text-[#213448] mt-0.5">
                     {parsedResult.noPolisi || '-'}
                   </div>
                 </div>
-                <div className="p-2.5 bg-white rounded-lg border border-[#CED4DA]">
-                  <div className="text-[10px] text-[#343A40]/70">Model Kendaraan</div>
-                  <div className="font-bold text-[#343A40] mt-0.5">
+                <div className="p-2.5 bg-white rounded-lg border border-[#94B4C1]/40">
+                  <div className="text-[10px] text-[#547792]">Model Kendaraan</div>
+                  <div className="font-bold text-[#213448] mt-0.5">
                     {parsedResult.model || '-'}
                   </div>
                 </div>
-                <div className="p-2.5 bg-white rounded-lg border border-[#CED4DA]">
-                  <div className="text-[10px] text-[#343A40]/70">Tahun</div>
-                  <div className="font-bold text-[#343A40] mt-0.5">
+                <div className="p-2.5 bg-white rounded-lg border border-[#94B4C1]/40">
+                  <div className="text-[10px] text-[#547792]">Tahun</div>
+                  <div className="font-bold text-[#213448] mt-0.5">
                     {parsedResult.tahun || '(Diisi Manual)'}
                   </div>
                 </div>
-                <div className="p-2.5 bg-white rounded-lg border border-[#CED4DA]">
-                  <div className="text-[10px] text-[#343A40]/70">Nomor SPO</div>
-                  <div className="font-bold text-[#343A40] mt-0.5 break-all">
+                <div className="p-2.5 bg-white rounded-lg border border-[#94B4C1]/40">
+                  <div className="text-[10px] text-[#547792]">Nomor SPO</div>
+                  <div className="font-bold text-[#213448] mt-0.5 break-all">
                     {parsedResult.nomorSpo || '-'}
                   </div>
                 </div>
@@ -370,18 +370,18 @@ export const SpoModal: React.FC<SpoModalProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 {/* Jasa Preview */}
-                <div className="p-3 bg-white rounded-lg border border-[#CED4DA]">
-                  <div className="font-bold text-[#343A40] mb-2">
+                <div className="p-3 bg-white rounded-lg border border-[#94B4C1]/40">
+                  <div className="font-bold text-[#213448] mb-2">
                     List Jasa ({parsedResult.jasaList.length} item)
                   </div>
                   {parsedResult.jasaList.length === 0 ? (
-                    <div className="text-[#343A40]/55">Tidak ada item jasa</div>
+                    <div className="text-[#94B4C1]">Tidak ada item jasa</div>
                   ) : (
                     <ul className="space-y-1.5">
                       {parsedResult.jasaList.map((it, idx) => (
                         <li
                           key={idx}
-                          className="flex items-center justify-between gap-2 text-[11px] text-[#343A40]"
+                          className="flex items-center justify-between gap-2 text-[11px] text-[#213448]"
                         >
                           <span className="truncate">{it.nama}</span>
                           <span className="font-mono shrink-0 tabular-nums">
@@ -394,18 +394,18 @@ export const SpoModal: React.FC<SpoModalProps> = ({
                 </div>
 
                 {/* Sparepart Preview */}
-                <div className="p-3 bg-white rounded-lg border border-[#CED4DA]">
-                  <div className="font-bold text-[#343A40] mb-2">
+                <div className="p-3 bg-white rounded-lg border border-[#94B4C1]/40">
+                  <div className="font-bold text-[#213448] mb-2">
                     List Sparepart ({parsedResult.sparepartList.length} item)
                   </div>
                   {parsedResult.sparepartList.length === 0 ? (
-                    <div className="text-[#343A40]/55">Tidak ada item sparepart</div>
+                    <div className="text-[#94B4C1]">Tidak ada item sparepart</div>
                   ) : (
                     <ul className="space-y-1.5">
                       {parsedResult.sparepartList.map((it, idx) => (
                         <li
                           key={idx}
-                          className="flex items-center justify-between gap-2 text-[11px] text-[#343A40]"
+                          className="flex items-center justify-between gap-2 text-[11px] text-[#213448]"
                         >
                           <span className="truncate">{it.nama}</span>
                           <span className="font-mono shrink-0 tabular-nums">
@@ -422,11 +422,11 @@ export const SpoModal: React.FC<SpoModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-4 bg-[#F8F9FA] border-t border-[#CED4DA] flex items-center justify-end gap-3">
+        <div className="px-6 py-4 bg-[#F7F5F0] border-t border-[#94B4C1]/40 flex items-center justify-end gap-3">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-[#343A40] bg-white hover:bg-[#CED4DA]/35 border border-[#CED4DA] rounded-lg transition-colors cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold text-[#213448] bg-white hover:bg-[#EAE0CF]/30 border border-[#94B4C1] rounded-lg transition-colors cursor-pointer"
           >
             Batal
           </button>
@@ -434,7 +434,7 @@ export const SpoModal: React.FC<SpoModalProps> = ({
             type="button"
             disabled={!hasValidExtraction}
             onClick={handleApply}
-            className="px-5 py-2 text-xs font-semibold text-white bg-[#1F2E4A] hover:bg-[#2A3E63] disabled:bg-[#CED4DA] disabled:text-[#343A40]/50 disabled:cursor-not-allowed rounded-lg transition-colors cursor-pointer"
+            className="px-5 py-2 text-xs font-semibold text-white bg-[#547792] hover:bg-[#213448] disabled:bg-[#94B4C1]/40 disabled:text-[#213448]/50 disabled:cursor-not-allowed rounded-lg transition-colors cursor-pointer"
           >
             Terapkan ke Form Invoice
           </button>

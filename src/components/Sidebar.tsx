@@ -41,21 +41,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div>
         {/* Header Sidebar */}
         <div
-          className={`border-b border-[#CED4DA]/15 flex items-center ${
+          className={`border-b border-[#547792]/40 flex items-center ${
             expanded ? 'p-4 justify-between gap-2.5' : 'p-3 justify-center'
           }`}
         >
           {expanded ? (
             <>
               <div className="flex items-start gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-[#2B3F64] border border-[#CED4DA]/25 flex items-center justify-center shrink-0 shadow-xs">
-                  <Wrench className="w-4 h-4 text-[#F8F9FA]" />
+                <div className="w-9 h-9 rounded-lg bg-[#547792]/25 border border-[#94B4C1]/40 flex items-center justify-center shrink-0 shadow-xs">
+                  <Wrench className="w-4 h-4 text-[#EAE0CF]" />
                 </div>
                 <div className="min-w-0">
                   <h1 className="text-xs font-bold text-white leading-snug">
                     CV PERKASA MANDIRI PUTRA
                   </h1>
-                  <p className="text-[11px] text-[#CED4DA] mt-0.5 truncate">
+                  <p className="text-[11px] text-[#94B4C1] mt-0.5 truncate">
                     Workshop Invoice System
                   </p>
                 </div>
@@ -66,7 +66,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onClick={isMobile ? onCloseMobileDrawer : onToggleSidebar}
                 aria-label={isMobile ? 'Tutup Menu Navigasi' : 'Tutup Sidebar'}
                 title={isMobile ? 'Tutup Menu Navigasi' : 'Tutup Sidebar'}
-                className="p-1.5 rounded-lg text-[#CED4DA] hover:text-white hover:bg-[#2B3F64] transition-colors shrink-0 cursor-pointer"
+                className="p-1.5 rounded-lg text-[#94B4C1] hover:text-white hover:bg-[#547792]/30 transition-colors shrink-0 cursor-pointer"
               >
                 {isMobile ? (
                   <X className="w-4 h-4" />
@@ -81,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={onToggleSidebar}
               aria-label="Buka Sidebar"
               title="Buka Sidebar"
-              className="w-10 h-10 rounded-lg bg-[#2B3F64] hover:bg-[#2A3E63] border border-[#CED4DA]/25 flex items-center justify-center text-[#F8F9FA] hover:text-white transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-lg bg-[#547792]/25 hover:bg-[#547792]/40 border border-[#94B4C1]/40 flex items-center justify-center text-[#EAE0CF] hover:text-white transition-colors cursor-pointer"
             >
               <PanelLeftOpen className="w-4 h-4" />
             </button>
@@ -96,7 +96,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {/* Section 1: MENU UTAMA */}
           <div className="space-y-2">
             {expanded && (
-              <div className="px-3 mb-2 text-[11px] font-semibold tracking-wider text-[#CED4DA] uppercase">
+              <div className="px-3 mb-2 text-[11px] font-semibold tracking-wider text-[#94B4C1] uppercase">
                 MENU UTAMA
               </div>
             )}
@@ -114,8 +114,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 expanded ? 'gap-3 px-3 py-2.5' : 'justify-center p-2.5'
               } ${
                 activePage === 'INVOICE'
-                  ? 'bg-[#2B3F64] text-white shadow-xs ring-1 ring-[#CED4DA]/25'
-                  : 'text-[#CED4DA] hover:bg-[#2B3F64]/60 hover:text-white'
+                  ? 'bg-[#547792] text-white shadow-xs'
+                  : 'text-[#94B4C1] hover:bg-[#547792]/30 hover:text-white'
               }`}
             >
               <FileText className="w-4 h-4 shrink-0" />
@@ -135,8 +135,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 expanded ? 'gap-3 px-3 py-2.5' : 'justify-center p-2.5'
               } ${
                 activePage === 'PKB'
-                  ? 'bg-[#2B3F64] text-white shadow-xs ring-1 ring-[#CED4DA]/25'
-                  : 'text-[#CED4DA] hover:bg-[#2B3F64]/60 hover:text-white'
+                  ? 'bg-[#547792] text-white shadow-xs'
+                  : 'text-[#94B4C1] hover:bg-[#547792]/30 hover:text-white'
               }`}
             >
               <ClipboardList className="w-4 h-4 shrink-0" />
@@ -145,9 +145,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
 
           {/* Section 2: TOOLS */}
-          <div className="pt-4 border-t border-[#CED4DA]/15 space-y-2">
+          <div className="pt-4 border-t border-[#547792]/35 space-y-2">
             {expanded && (
-              <div className="px-3 mb-2 text-[11px] font-semibold tracking-wider text-[#CED4DA] uppercase">
+              <div className="px-3 mb-2 text-[11px] font-semibold tracking-wider text-[#94B4C1] uppercase">
                 TOOLS
               </div>
             )}
@@ -170,8 +170,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 expanded ? 'gap-3 px-3 py-2.5' : 'justify-center p-2.5'
               } ${
                 isCalculatorOpen
-                  ? 'bg-[#2B3F64] text-white shadow-xs ring-1 ring-[#CED4DA]/25'
-                  : 'text-[#CED4DA] hover:bg-[#2B3F64]/60 hover:text-white'
+                  ? 'bg-[#547792] text-white shadow-xs'
+                  : 'text-[#94B4C1] hover:bg-[#547792]/30 hover:text-white'
               }`}
             >
               <Calculator className="w-4 h-4 shrink-0" />
@@ -183,12 +183,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Bottom Indicator: Preset Tujuan Aktif */}
       {expanded ? (
-        <div className="p-4 m-3 rounded-lg bg-[#162238] border border-[#CED4DA]/20">
-          <div className="text-[11px] font-medium text-[#CED4DA]">
+        <div className="p-4 m-3 rounded-lg bg-[#182736] border border-[#94B4C1]/30">
+          <div className="text-[11px] font-medium text-[#94B4C1]">
             Preset Tujuan Aktif
           </div>
           <div
-            className="mt-1 text-xs font-semibold text-[#F8F9FA] leading-snug break-words"
+            className="mt-1 text-xs font-semibold text-[#EAE0CF] leading-snug break-words"
             data-testid={isMobile ? 'mobile-sidebar-active-preset' : 'sidebar-active-preset'}
           >
             {activePage === 'PKB'
@@ -199,7 +199,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       ) : (
         <div className="p-2.5 mb-2 flex justify-center">
           <div
-            className="w-10 h-10 rounded-lg bg-[#162238] border border-[#CED4DA]/20 flex items-center justify-center text-[10px] font-bold text-[#F8F9FA]"
+            className="w-10 h-10 rounded-lg bg-[#182736] border border-[#94B4C1]/30 flex items-center justify-center text-[10px] font-bold text-[#EAE0CF]"
             title={`Preset Tujuan Aktif: ${
               activePage === 'PKB' ? 'SOLUSI MOBILITAS BANGSA' : activeClientName
             }`}
@@ -219,7 +219,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <aside
         data-testid="app-sidebar"
         data-open={isSidebarOpen ? 'true' : 'false'}
-        className={`hidden lg:flex no-print shrink-0 bg-[#1F2E4A] text-white flex-col justify-between border-r border-[#CED4DA]/15 select-none transition-all duration-300 sticky top-0 h-screen ${
+        className={`hidden lg:flex no-print shrink-0 bg-[#213448] text-white flex-col justify-between border-r border-[#547792]/40 select-none transition-all duration-300 sticky top-0 h-screen ${
           isSidebarOpen ? 'w-64' : 'w-16'
         }`}
       >
@@ -230,13 +230,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {isMobileDrawerOpen && (
         <div className="lg:hidden no-print fixed inset-0 z-40 flex">
           <div
-            className="fixed inset-0 bg-[#1F2E4A]/55 backdrop-blur-[1px]"
+            className="fixed inset-0 bg-[#213448]/50 backdrop-blur-[1px]"
             onClick={onCloseMobileDrawer}
             aria-hidden="true"
           />
           <aside
             data-testid="mobile-sidebar-drawer"
-            className="relative z-50 w-72 max-w-[82vw] h-full bg-[#1F2E4A] text-white flex flex-col justify-between border-r border-[#CED4DA]/15 shadow-2xl select-none"
+            className="relative z-50 w-72 max-w-[82vw] h-full bg-[#213448] text-white flex flex-col justify-between border-r border-[#547792]/40 shadow-2xl select-none"
           >
             {renderSidebarContent(true, true)}
           </aside>
