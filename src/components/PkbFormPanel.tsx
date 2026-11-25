@@ -494,7 +494,7 @@ export const PkbFormPanel: React.FC<PkbFormPanelProps> = ({
                     </div>
                     <div className="col-span-4 text-right">
                       <div className="text-[10px] font-medium text-[#547792] mb-0.5">
-                        Biaya Jasa
+                        Biaya Part
                       </div>
                       <div className="text-xs font-bold text-[#213448] tabular-nums">
                         Rp {formatCurrencyComma(rowTotal)}

@@ -132,6 +132,7 @@ export function generatePkbPdf(
   const renderPkbSection = (
     sectionTitle: string,
     columnTitle: string,
+    amountColumnTitle: string,
     items: LineItem[],
     subtotalLabel: string,
     subtotalValue: number
@@ -155,7 +156,7 @@ export function generatePkbPdf(
     doc.text(columnTitle, colDescCenter, y, { align: 'center' });
     doc.text('Qty', colQtyCenter, y, { align: 'center' });
     doc.text('Harga Satuan', colPriceCenter, y, { align: 'center' });
-    doc.text('Biaya Jasa', colBiayaCenter, y, { align: 'center' });
+    doc.text(amountColumnTitle, colBiayaCenter, y, { align: 'center' });
 
     // Horizontal line below column header
     y += 2.2;
@@ -224,6 +225,7 @@ export function generatePkbPdf(
   renderPkbSection(
     'Rincian Jasa',
     'Jasa',
+    'Biaya Jasa',
     data.jasaList,
     'Sub. Total Jasa :',
     totals.subTotalJasa
@@ -232,6 +234,7 @@ export function generatePkbPdf(
   renderPkbSection(
     'Rincian Part',
     'Part',
+    'Biaya Part',
     data.sparepartList,
     'Sub. Total Part :',
     totals.subTotalPart

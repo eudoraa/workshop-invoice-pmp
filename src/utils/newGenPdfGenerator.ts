@@ -8,6 +8,7 @@ import {
   getTargetPdfFilename,
   getTargetPkbFilename,
   NEW_GEN_WORKSHOP_INFO,
+  normalizeAddressText,
   resolveDisplaySpk,
   WORKSHOP_INFO,
 } from './invoiceLogic';
@@ -56,12 +57,6 @@ function drawNewGenKopHeader(
   doc.setTextColor(...INK);
   doc.text(companyName, identityX, topY + 3.5);
 
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.2);
-  doc.setTextColor(...MUTED);
-  doc.text(NEW_GEN_WORKSHOP_INFO.addressLine1, identityX, topY + 7.8);
-  doc.text(NEW_GEN_WORKSHOP_INFO.addressLine2, identityX, topY + 11.4);
-
   // Right: Stacked 3 lines (Phone with icon, Email with icon, NPWP)
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.2);
@@ -81,6 +76,24 @@ function drawNewGenKopHeader(
   doc.text(`NPWP : ${NEW_GEN_WORKSHOP_INFO.npwp}`, rightEdge, topY + 11.4, {
     align: 'right',
   });
+
+  // Left Address: strictly 2 single lines sized to stay well clear of the right contact column
+  const contactLeftEdge = rightEdge - Math.max(phoneW + 4.2, emailW + 4.8, doc.getTextWidth(`NPWP : ${NEW_GEN_WORKSHOP_INFO.npwp}`));
+  const maxAddrW = Math.max(70, contactLeftEdge - identityX - 4);
+  doc.setFont('helvetica', 'normal');
+  let addrFontSize = 7.8;
+  doc.setFontSize(addrFontSize);
+  const longestAddrW = Math.max(
+    doc.getTextWidth(NEW_GEN_WORKSHOP_INFO.addressLine1),
+    doc.getTextWidth(NEW_GEN_WORKSHOP_INFO.addressLine2)
+  );
+  if (longestAddrW > maxAddrW) {
+    addrFontSize = Math.max(6.8, Number(((addrFontSize * maxAddrW) / longestAddrW).toFixed(2)));
+    doc.setFontSize(addrFontSize);
+  }
+  doc.setTextColor(...MUTED);
+  doc.text(NEW_GEN_WORKSHOP_INFO.addressLine1, identityX, topY + 7.8);
+  doc.text(NEW_GEN_WORKSHOP_INFO.addressLine2, identityX, topY + 11.4);
 
   // Strong Kop bottom divider (2px ~ 0.65mm)
   const kopLineY = topY + 15;
@@ -126,7 +139,8 @@ function drawNewGenSectionTable(
   items: LineItem[],
   subtotalLabel: string,
   subtotalValue: number,
-  qtyFirst: boolean
+  qtyFirst: boolean,
+  amountColumnTitle?: string
 ): number {
   let y = startY;
   const contentW = rightEdge - marginX; // 180mm
@@ -167,7 +181,7 @@ function drawNewGenSectionTable(
 
   // Layout options:
   // Invoice: NO (6%) | JASA/PART (46%) | HARGA SATUAN (20%) | QTY (8%) | JUMLAH (20%)
-  // PKB:     NO (6%) | JASA/PART (46%) | QTY (8%) | HARGA SATUAN (20%) | BIAYA JASA (20%)
+  // PKB:     NO (6%) | JASA/PART (46%) | QTY (8%) | HARGA SATUAN (20%) | BIAYA JASA / BIAYA PART (20%)
   const colPriceRpLeft = qtyFirst ? marginX + 109 : marginX + 94;
   const colPriceRight = qtyFirst ? marginX + 141 : marginX + 127;
   const colQtyCenter = qtyFirst ? marginX + 101 : marginX + 136;
@@ -184,12 +198,12 @@ function drawNewGenSectionTable(
     doc.text('QTY', colQtyCenter, y + 5.5, { align: 'center' });
     doc.text('HARGA', colPriceRight, y + 3.7, { align: 'right' });
     doc.text('SATUAN', colPriceRight, y + 7.1, { align: 'right' });
-    doc.text('BIAYA JASA', colAmountRight, y + 5.5, { align: 'right' });
+    doc.text(amountColumnTitle || 'BIAYA JASA', colAmountRight, y + 5.5, { align: 'right' });
   } else {
     doc.text('HARGA', colPriceRight, y + 3.7, { align: 'right' });
     doc.text('SATUAN', colPriceRight, y + 7.1, { align: 'right' });
     doc.text('QTY', colQtyCenter, y + 5.5, { align: 'center' });
-    doc.text('JUMLAH', colAmountRight, y + 5.5, { align: 'right' });
+    doc.text(amountColumnTitle || 'JUMLAH', colAmountRight, y + 5.5, { align: 'right' });
   }
 
   y += headerH;
@@ -300,8 +314,14 @@ export function generateNewGenInvoicePdf(data: InvoiceData): void {
   // Measure left card address lines to size card height dynamically
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
-  const addr1Lines = doc.splitTextToSize(data.alamatBaris1 || '', leftCardW - 8);
-  const addr2Lines = doc.splitTextToSize(data.alamatBaris2 || '', leftCardW - 8);
+  const addr1Lines = doc.splitTextToSize(
+    normalizeAddressText(data.alamatBaris1 || ''),
+    leftCardW - 8
+  );
+  const addr2Lines = doc.splitTextToSize(
+    normalizeAddressText(data.alamatBaris2 || ''),
+    leftCardW - 8
+  );
   const leftContentH =
     14 + (addr1Lines.length + addr2Lines.length) * 3.6 + 3;
   const rightContentH = data.includeSpk ? 31 : 27;
@@ -641,7 +661,8 @@ export function generateNewGenPkbPdf(data: PkbData): void {
     data.jasaList,
     'Sub. Total Jasa',
     totals.subTotalJasa,
-    true
+    true,
+    'BIAYA JASA'
   );
 
   y = drawNewGenSectionTable(
@@ -655,7 +676,8 @@ export function generateNewGenPkbPdf(data: PkbData): void {
     data.sparepartList,
     'Sub. Total Part',
     totals.subTotalPart,
-    true
+    true,
+    'BIAYA PART'
   );
 
   // =========================================================================

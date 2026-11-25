@@ -4,6 +4,7 @@ import {
   calculateInvoiceTotals,
   formatCurrencyComma,
   NEW_GEN_WORKSHOP_INFO,
+  normalizeAddressText,
   resolveDisplaySpk,
   WORKSHOP_INFO,
 } from '../utils/invoiceLogic';
@@ -11,9 +12,13 @@ import { NewGenKopHeader } from './NewGenKopHeader';
 
 interface InvoiceNewGenPreviewProps {
   data: InvoiceData;
+  isPrintMode?: boolean;
 }
 
-export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data }) => {
+export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({
+  data,
+  isPrintMode = false,
+}) => {
   const totals = calculateInvoiceTotals(data);
 
   const renderSectionTable = (
@@ -122,8 +127,8 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
 
   return (
     <div
-      id="a4-invoice-preview"
-      data-testid="a4-invoice-preview"
+      id={isPrintMode ? undefined : 'a4-invoice-preview'}
+      data-testid={isPrintMode ? 'print-a4-invoice-preview' : 'a4-invoice-preview'}
       data-template-style="newgen"
       className="a4-invoice-sheet bg-white text-[#0f172a] mx-auto shadow-md border border-slate-200 w-full max-w-[210mm] min-h-[297mm] px-[15mm] py-[14mm] box-border"
       style={{
@@ -136,6 +141,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
         documentTitle="INVOICE"
         categoryBadge={data.kategoriPekerjaan || 'SERVICE BERKALA'}
         badgeTestId="preview-kategori"
+        isPrintMode={isPrintMode}
       />
 
       {/* 2. DUA KARTU INFORMASI (KEPADA YTH & INFORMASI BENGKEL) */}
@@ -150,13 +156,13 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
           </div>
           <div
             className="text-[9.5pt] font-bold text-[#0f172a] leading-snug"
-            data-testid="preview-client-name"
+            data-testid={isPrintMode ? undefined : 'preview-client-name'}
           >
             {data.namaKlien || '-'}
           </div>
           <div className="text-[8.5pt] text-[#475569] leading-[1.4] mt-1">
-            <div>{data.alamatBaris1}</div>
-            <div>{data.alamatBaris2}</div>
+            <div>{normalizeAddressText(data.alamatBaris1)}</div>
+            <div>{normalizeAddressText(data.alamatBaris2)}</div>
           </div>
         </div>
 
@@ -176,7 +182,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
               <span className="col-span-4 text-[#475569]">No Inv</span>
               <span
                 className="col-span-8 font-bold text-[#0f172a]"
-                data-testid="preview-no-inv"
+                data-testid={isPrintMode ? undefined : 'preview-no-inv'}
               >
                 : {data.noInv || '-'}
               </span>
@@ -188,7 +194,10 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
               </span>
             </div>
             {data.includeSpk && (
-              <div className="grid grid-cols-12" data-testid="preview-spk-row">
+              <div
+                className="grid grid-cols-12"
+                data-testid={isPrintMode ? undefined : 'preview-spk-row'}
+              >
                 <span className="col-span-4 text-[#475569]">No. SPK</span>
                 <span className="col-span-8 font-medium text-[#0f172a]">
                   : {resolveDisplaySpk(data.noSpk, data.noInv)}
@@ -211,7 +220,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5 whitespace-nowrap"
-              data-testid="preview-no-polisi"
+              data-testid={isPrintMode ? undefined : 'preview-no-polisi'}
             >
               {data.noPolisi || '-'}
             </div>
@@ -222,7 +231,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5"
-              data-testid="preview-model"
+              data-testid={isPrintMode ? undefined : 'preview-model'}
             >
               {data.model || '-'}
             </div>
@@ -233,7 +242,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5 whitespace-nowrap"
-              data-testid="preview-tahun"
+              data-testid={isPrintMode ? undefined : 'preview-tahun'}
             >
               {data.tahun || '-'}
             </div>
@@ -244,7 +253,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5 whitespace-nowrap"
-              data-testid="preview-nomor-spo"
+              data-testid={isPrintMode ? undefined : 'preview-nomor-spo'}
             >
               {data.nomorSpo || '-'}
             </div>
@@ -273,7 +282,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
       {data.enablePpn && (
         <div
           className="flex items-center text-[9pt] pt-1.5"
-          data-testid="preview-ppn-row"
+          data-testid={isPrintMode ? undefined : 'preview-ppn-row'}
         >
           <div className="w-[80%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
             PPN ({data.ppnRate}%) :
@@ -288,7 +297,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
       {data.enablePph && (
         <div
           className="flex items-center text-[9pt] pt-1.5"
-          data-testid="preview-pph-row"
+          data-testid={isPrintMode ? undefined : 'preview-pph-row'}
         >
           <div className="w-[80%] text-right pr-3 font-semibold text-[#475569] whitespace-nowrap">
             PPh 23 ({data.pphRate}%) :
@@ -330,7 +339,7 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
             </span>
             <span
               className="text-[12pt] font-bold text-[#0f172a] tabular-nums"
-              data-testid="preview-grand-total"
+              data-testid={isPrintMode ? undefined : 'preview-grand-total'}
             >
               Rp {formatCurrencyComma(totals.grandTotal)}
             </span>
@@ -346,14 +355,14 @@ export const InvoiceNewGenPreview: React.FC<InvoiceNewGenPreviewProps> = ({ data
             <div className="w-[60mm] max-w-full mx-auto border-t border-[#cbd5e1] pt-1.5">
               <div
                 className="text-[10pt] font-bold text-[#0f172a]"
-                data-testid="preview-signatory-name"
+                data-testid={isPrintMode ? undefined : 'preview-signatory-name'}
               >
                 {data.namaPenandatangan}
               </div>
               {data.jabatanPenandatangan && data.jabatanPenandatangan.trim() !== '' && (
                 <div
                   className="text-[9.5pt] text-[#475569] mt-0.5"
-                  data-testid="preview-signatory-role"
+                  data-testid={isPrintMode ? undefined : 'preview-signatory-role'}
                 >
                   {data.jabatanPenandatangan}
                 </div>

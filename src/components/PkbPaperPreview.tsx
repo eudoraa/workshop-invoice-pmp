@@ -11,14 +11,16 @@ import { PMP_LOGO_BASE64 } from './PmpMonogramLogo';
 interface PkbPaperPreviewProps {
   data: PkbData;
   templateStyle?: TemplateStyle;
+  isPrintMode?: boolean;
 }
 
 export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
   data,
   templateStyle = 'default',
+  isPrintMode = false,
 }) => {
   if (templateStyle === 'newgen') {
-    return <PkbNewGenPreview data={data} />;
+    return <PkbNewGenPreview data={data} isPrintMode={isPrintMode} />;
   }
 
   const totals = calculatePkbTotals(data);
@@ -26,6 +28,7 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
   const renderPkbSection = (
     sectionTitle: string,
     columnTitle: string,
+    amountColumnTitle: string,
     items: LineItem[],
     subtotalLabel: string,
     subtotalAmount: number
@@ -53,7 +56,7 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
                 Harga Satuan
               </th>
               <th className="py-1.5 px-1 text-center font-bold w-[20%] whitespace-nowrap">
-                Biaya Jasa
+                {amountColumnTitle}
               </th>
             </tr>
           </thead>
@@ -127,8 +130,8 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
 
   return (
     <div
-      id="a4-pkb-preview"
-      data-testid="a4-pkb-preview"
+      id={isPrintMode ? undefined : 'a4-pkb-preview'}
+      data-testid={isPrintMode ? 'print-a4-pkb-preview' : 'a4-pkb-preview'}
       className="a4-invoice-sheet bg-white text-black mx-auto shadow-md border border-slate-200 w-full max-w-[210mm] min-h-[297mm] px-[15mm] py-[15mm] box-border"
       style={{
         fontFamily: 'Arial, Helvetica, Calibri, sans-serif',
@@ -165,19 +168,28 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
         <div className="w-[52%] space-y-1">
           <div className="grid grid-cols-12">
             <span className="col-span-4">No PKB</span>
-            <span className="col-span-8" data-testid="pkb-preview-no-pkb">
+            <span
+              className="col-span-8"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-no-pkb'}
+            >
               : &nbsp;&nbsp;{data.noPkb || '-'}
             </span>
           </div>
           <div className="grid grid-cols-12">
             <span className="col-span-4">No Polisi</span>
-            <span className="col-span-8" data-testid="pkb-preview-nopol">
+            <span
+              className="col-span-8"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-nopol'}
+            >
               : &nbsp;&nbsp;{data.noPolisi || '-'}
             </span>
           </div>
           <div className="grid grid-cols-12">
             <span className="col-span-4">Type</span>
-            <span className="col-span-8" data-testid="pkb-preview-type">
+            <span
+              className="col-span-8"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-type'}
+            >
               : &nbsp;&nbsp;{data.typeModel || '-'}
             </span>
           </div>
@@ -190,7 +202,10 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
               <span className="w-14">Tanggal</span>
               <span>:</span>
             </div>
-            <span className="tabular-nums" data-testid="pkb-preview-tanggal">
+            <span
+              className="tabular-nums"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-tanggal'}
+            >
               {data.tanggalPkb || '-'}
             </span>
           </div>
@@ -199,7 +214,10 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
               <span className="w-14">KM</span>
               <span>:</span>
             </div>
-            <span className="tabular-nums" data-testid="pkb-preview-km">
+            <span
+              className="tabular-nums"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-km'}
+            >
               {data.km || '-'}
             </span>
           </div>
@@ -210,6 +228,7 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
       {renderPkbSection(
         'Rincian Jasa',
         'Jasa',
+        'Biaya Jasa',
         data.jasaList,
         'Sub. Total Jasa :',
         totals.subTotalJasa
@@ -219,6 +238,7 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
       {renderPkbSection(
         'Rincian Part',
         'Part',
+        'Biaya Part',
         data.sparepartList,
         'Sub. Total Part :',
         totals.subTotalPart
@@ -232,7 +252,7 @@ export const PkbPaperPreview: React.FC<PkbPaperPreviewProps> = ({
           </div>
           <div
             className="w-[20%] px-1 flex items-center justify-between tabular-nums"
-            data-testid="pkb-preview-grand-total"
+            data-testid={isPrintMode ? undefined : 'pkb-preview-grand-total'}
           >
             <span>Rp</span>
             <span>{formatCurrencyComma(totals.grandTotal)}</span>

@@ -9,14 +9,19 @@ import { NewGenKopHeader } from './NewGenKopHeader';
 
 interface PkbNewGenPreviewProps {
   data: PkbData;
+  isPrintMode?: boolean;
 }
 
-export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
+export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({
+  data,
+  isPrintMode = false,
+}) => {
   const totals = calculatePkbTotals(data);
 
   const renderSectionTable = (
     sectionTitle: string,
     columnTitle: string,
+    amountColumnTitle: string,
     items: LineItem[],
     subtotalLabel: string,
     subtotalAmount: number
@@ -46,7 +51,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
                 SATUAN
               </th>
               <th className="py-1.5 px-2 text-right font-bold w-[20%] uppercase text-[8.5pt]">
-                BIAYA JASA
+                {amountColumnTitle}
               </th>
             </tr>
           </thead>
@@ -120,8 +125,8 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
 
   return (
     <div
-      id="a4-pkb-preview"
-      data-testid="a4-pkb-preview"
+      id={isPrintMode ? undefined : 'a4-pkb-preview'}
+      data-testid={isPrintMode ? 'print-a4-pkb-preview' : 'a4-pkb-preview'}
       data-template-style="newgen"
       className="a4-invoice-sheet bg-white text-[#0f172a] mx-auto shadow-md border border-slate-200 w-full max-w-[210mm] min-h-[297mm] px-[15mm] py-[14mm] box-border"
       style={{
@@ -144,7 +149,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5"
-              data-testid="pkb-preview-no-pkb"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-no-pkb'}
             >
               {data.noPkb || '-'}
             </div>
@@ -155,7 +160,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5"
-              data-testid="pkb-preview-nopol"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-nopol'}
             >
               {data.noPolisi || '-'}
             </div>
@@ -166,7 +171,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5"
-              data-testid="pkb-preview-type"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-type'}
             >
               {data.typeModel || '-'}
             </div>
@@ -177,7 +182,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5 tabular-nums"
-              data-testid="pkb-preview-tanggal"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-tanggal'}
             >
               {data.tanggalPkb || '-'}
             </div>
@@ -188,7 +193,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
             </div>
             <div
               className="text-[9pt] font-bold text-[#0f172a] mt-0.5 tabular-nums"
-              data-testid="pkb-preview-km"
+              data-testid={isPrintMode ? undefined : 'pkb-preview-km'}
             >
               {data.km || '-'}
             </div>
@@ -200,6 +205,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
       {renderSectionTable(
         'RINCIAN JASA',
         'JASA',
+        'BIAYA JASA',
         data.jasaList,
         'Sub. Total Jasa',
         totals.subTotalJasa
@@ -208,6 +214,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
       {renderSectionTable(
         'RINCIAN PART',
         'PART',
+        'BIAYA PART',
         data.sparepartList,
         'Sub. Total Part',
         totals.subTotalPart
@@ -221,7 +228,7 @@ export const PkbNewGenPreview: React.FC<PkbNewGenPreviewProps> = ({ data }) => {
           </span>
           <span
             className="text-[12pt] font-bold text-[#0f172a] tabular-nums"
-            data-testid="pkb-preview-grand-total"
+            data-testid={isPrintMode ? undefined : 'pkb-preview-grand-total'}
           >
             Rp {formatCurrencyComma(totals.grandTotal)}
           </span>

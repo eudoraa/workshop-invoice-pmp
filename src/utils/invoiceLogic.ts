@@ -50,7 +50,7 @@ export const CLIENT_PRESETS: Record<ClientPresetId, ClientPresetConfig> = {
     shortLabel: 'GoFleet (PT Solusi Mobilitas Bangsa)',
     badgeText: 'GoFleet',
     namaKlien: 'SOLUSI MOBILITAS BANGSA',
-    alamatBaris1: 'GEDUNG PASARAYA BLOK M GEDUNG B LT. 4, JL. INSKANDARSYAH II',
+    alamatBaris1: 'GEDUNG PASARAYA BLOK M GEDUNG B LT. 4, JL. ISKANDARSYAH II',
     alamatBaris2: 'NO. 02 RT 02 RW 01, MELAWAI KEBAYORAN BARU',
     kategoriPekerjaan: 'SERVICE BERKALA',
     includeSpk: true,
@@ -407,6 +407,43 @@ export function getTargetPkbFilename(noPkb: string, noPolisi: string): string {
   const cleanPkb = (noPkb || '').trim().replace(/[^a-zA-Z0-9_-]/g, '') || 'DRAFT';
   const cleanPol = formatNoPolisiCompact(noPolisi).replace(/[^a-zA-Z0-9_-]/g, '') || 'UNIT';
   return `PKB_${cleanPkb}_${cleanPol}.pdf`;
+}
+
+/**
+ * Strips trailing .pdf from a target filename for temporary document.title during window.print().
+ */
+export function getPrintDocumentTitle(targetFilename: string): string {
+  return (targetFilename || '').replace(/\.pdf$/i, '') || 'Dokumen_PMP';
+}
+
+/**
+ * Normalizes legacy GoFleet address typo ("INSKANDARSYAH" -> "ISKANDARSYAH").
+ */
+export function normalizeAddressText(text: string): string {
+  return (text || '').replace(/INSKANDARSYAH/gi, (match) => {
+    if (match === match.toUpperCase()) return 'ISKANDARSYAH';
+    if (match === match.toLowerCase()) return 'iskandarsyah';
+    return 'Iskandarsyah';
+  });
+}
+
+/**
+ * Normalizes loaded InvoiceData (e.g., from localStorage) to fix legacy address typos.
+ */
+export function normalizeInvoiceData(data: InvoiceData): InvoiceData {
+  const normalizedBaris1 = normalizeAddressText(data.alamatBaris1);
+  const normalizedBaris2 = normalizeAddressText(data.alamatBaris2);
+  if (
+    normalizedBaris1 === data.alamatBaris1 &&
+    normalizedBaris2 === data.alamatBaris2
+  ) {
+    return data;
+  }
+  return {
+    ...data,
+    alamatBaris1: normalizedBaris1,
+    alamatBaris2: normalizedBaris2,
+  };
 }
 
 /**

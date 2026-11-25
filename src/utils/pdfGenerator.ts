@@ -5,6 +5,7 @@ import {
   calculateInvoiceTotals,
   formatCurrencyComma,
   getTargetPdfFilename,
+  normalizeAddressText,
   resolveDisplaySpk,
   WORKSHOP_INFO,
 } from './invoiceLogic';
@@ -108,10 +109,16 @@ export function generateAndDownloadInvoicePdf(
   doc.setFont('helvetica', 'normal');
   doc.text(data.namaKlien || '-', marginX, clientY);
   clientY += 4.2;
-  const addr1Lines = doc.splitTextToSize(data.alamatBaris1 || '', 105);
+  const addr1Lines = doc.splitTextToSize(
+    normalizeAddressText(data.alamatBaris1 || ''),
+    105
+  );
   doc.text(addr1Lines, marginX, clientY);
   clientY += addr1Lines.length * 4.0;
-  const addr2Lines = doc.splitTextToSize(data.alamatBaris2 || '', 105);
+  const addr2Lines = doc.splitTextToSize(
+    normalizeAddressText(data.alamatBaris2 || ''),
+    105
+  );
   doc.text(addr2Lines, marginX, clientY);
   clientY += addr2Lines.length * 4.0;
 

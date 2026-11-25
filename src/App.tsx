@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   CheckCircle2,
   Download,
@@ -34,8 +34,10 @@ import {
 import {
   createInitialInvoiceData,
   createInitialPkbData,
+  getPrintDocumentTitle,
   getTargetPdfFilename,
   getTargetPkbFilename,
+  normalizeInvoiceData,
   parseTemplateStyle,
   resolveDisplaySpk,
   resolveSpoToInvoiceAndPkb,
@@ -71,7 +73,7 @@ function loadSavedInvoiceData(): InvoiceData {
       sparepartList: Array.isArray(parsed.sparepartList) ? parsed.sparepartList : [],
     };
     merged.noSpk = resolveDisplaySpk(merged.noSpk, merged.noInv);
-    return merged;
+    return normalizeInvoiceData(merged);
   } catch {
     return createInitialInvoiceData();
   }
@@ -199,9 +201,36 @@ export default function App() {
     setIsResetConfirmOpen(false);
   };
 
-  const handlePrint = () => {
+  const handlePrint = useCallback(() => {
+    const originalTitle = document.title;
+    const printTitle = getPrintDocumentTitle(targetFilename);
+    let restored = false;
+
+    const restoreTitle = () => {
+      if (restored) return;
+      restored = true;
+      document.title = originalTitle;
+      window.removeEventListener('afterprint', restoreTitle);
+    };
+
+    window.addEventListener('afterprint', restoreTitle, { once: true });
+    document.title = printTitle;
     window.print();
-  };
+    window.setTimeout(restoreTitle, 1000);
+  }, [targetFilename]);
+
+  // Intercept Cmd + P (macOS) & Ctrl + P (Windows/Linux) to run unified print flow
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        handlePrint();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handlePrint]);
 
   const handleDownloadPdf = () => {
     if (activePage === 'INVOICE') {
@@ -237,8 +266,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0] text-[#213448] flex flex-col lg:flex-row">
-      {/* Kolom Kiri: Collapsible Sidebar Navigasi */}
+    <>
+      {/* Seluruh Aplikasi Interaktif disembunyikan saat Cetak Printer */}
+      <div className="print:hidden min-h-screen bg-[#F7F5F0] text-[#213448] flex flex-col lg:flex-row">
+        {/* Kolom Kiri: Collapsible Sidebar Navigasi */}
       <Sidebar
         activePage={activePage}
         onSelectPage={setActivePage}
@@ -411,11 +442,11 @@ export default function App() {
 
             {/* Panel Kanan: Live Preview Kertas A4 (Kertas putih #FFFFFF di dalam bingkai #EAE0CF/35) */}
             <div
-              className={`xl:col-span-7 print-only-container ${
+              className={`xl:col-span-7 ${
                 mobileTab === 'PREVIEW' ? 'block' : 'hidden xl:block'
               }`}
             >
-              <div className="print-only-container bg-[#EAE0CF]/35 rounded-2xl p-4 sm:p-5 border border-[#94B4C1]/35 overflow-x-auto">
+              <div className="bg-[#EAE0CF]/35 rounded-2xl p-4 sm:p-5 border border-[#94B4C1]/35 overflow-x-auto">
                 <div className="no-print flex items-center justify-between mb-3 px-1">
                   <span className="text-xs font-semibold text-[#213448]">
                     {activePage === 'INVOICE'
@@ -426,7 +457,7 @@ export default function App() {
                     210mm × 297mm
                   </span>
                 </div>
-                <div className="min-w-[680px] print-only-container">
+                <div className="min-w-[680px]">
                   {activePage === 'INVOICE' ? (
                     <InvoicePaperPreview
                       data={invoiceData}
@@ -504,6 +535,27 @@ export default function App() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+
+      {/* Kontainer Khusus Cetak A4 (100% tanpa scale/transform/padding workspace) */}
+      <div
+        className="hidden print:block print-sheet-root"
+        data-testid="print-sheet-root"
+      >
+        {activePage === 'INVOICE' ? (
+          <InvoicePaperPreview
+            data={invoiceData}
+            templateStyle={templateStyle}
+            isPrintMode
+          />
+        ) : (
+          <PkbPaperPreview
+            data={pkbData}
+            templateStyle={templateStyle}
+            isPrintMode
+          />
+        )}
+      </div>
+    </>
   );
 }

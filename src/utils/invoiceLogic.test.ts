@@ -4,6 +4,7 @@ import {
   applyClientPreset,
   calculateInvoiceTotals,
   calculatePkbTotals,
+  CLIENT_PRESETS,
   createInitialInvoiceData,
   createInitialPkbData,
   formatCurrencyComma,
@@ -11,9 +12,12 @@ import {
   formatNoPolisiSpaced,
   generateAutoPkbNo,
   generateAutoSpk,
+  getPrintDocumentTitle,
   getTargetPdfFilename,
   getTargetPkbFilename,
   NEW_GEN_WORKSHOP_INFO,
+  normalizeAddressText,
+  normalizeInvoiceData,
   parseTemplateStyle,
   PKB_WORKSHOP_INFO,
   resolveSpoToInvoiceAndPkb,
@@ -313,3 +317,44 @@ test('resolveSpoToInvoiceAndPkb isolates OLXMobbi SPO to Invoice only and syncs 
   assert.equal(olxAfterGoFleet.nextPkb.noPolisi, 'B 1550 DOC');
   assert.equal(olxAfterGoFleet.nextPkb.typeModel, 'DAIHATSU SIGRA');
 });
+
+test('GoFleet preset address uses ISKANDARSYAH and legacy localStorage typo is normalized', () => {
+  assert.equal(
+    CLIENT_PRESETS.GOFLEET.alamatBaris1,
+    'GEDUNG PASARAYA BLOK M GEDUNG B LT. 4, JL. ISKANDARSYAH II'
+  );
+  assert.equal(
+    CLIENT_PRESETS.GOFLEET.alamatBaris2,
+    'NO. 02 RT 02 RW 01, MELAWAI KEBAYORAN BARU'
+  );
+  assert.equal(CLIENT_PRESETS.GOFLEET.alamatBaris1.includes('INSKANDARSYAH'), false);
+
+  assert.equal(
+    normalizeAddressText('GEDUNG PASARAYA BLOK M GEDUNG B LT. 4, JL. INSKANDARSYAH II'),
+    'GEDUNG PASARAYA BLOK M GEDUNG B LT. 4, JL. ISKANDARSYAH II'
+  );
+
+  const legacyInvoice = {
+    ...createInitialInvoiceData('2026-11-20'),
+    alamatBaris1: 'GEDUNG PASARAYA BLOK M GEDUNG B LT. 4, JL. INSKANDARSYAH II',
+    alamatBaris2: 'JL. INSKANDARSYAH II NO. 02',
+  };
+  const normalized = normalizeInvoiceData(legacyInvoice);
+  assert.equal(
+    normalized.alamatBaris1,
+    'GEDUNG PASARAYA BLOK M GEDUNG B LT. 4, JL. ISKANDARSYAH II'
+  );
+  assert.equal(normalized.alamatBaris2, 'JL. ISKANDARSYAH II NO. 02');
+});
+
+test('getPrintDocumentTitle strips .pdf extension for browser print job title', () => {
+  assert.equal(
+    getPrintDocumentTitle(getTargetPdfFilename('PMP20266922', 'B1071DOJ')),
+    'Invoice_PMP20266922_B1071DOJ'
+  );
+  assert.equal(
+    getPrintDocumentTitle(getTargetPkbFilename('PMP6909', 'B 1550 DOC')),
+    'PKB_PMP6909_B1550DOC'
+  );
+});
+
